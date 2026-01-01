@@ -6,22 +6,23 @@
     <title>チロ村｜きたがわのりこ</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Yomogi&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body { font-family: 'Yomogi', cursive; }
+        /* 背景：ご機嫌な水玉模様 */
         .pop-bg {
             background-color: #fffbeb;
             background-image: radial-gradient(#FDBA74 2px, transparent 2px);
             background-size: 24px 24px;
         }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="pop-bg min-h-screen flex items-center justify-center p-4">
+<body class="pop-bg min-h-screen flex items-center justify-center p-4 leading-relaxed">
 
-    <div class="bg-white/95 backdrop-blur-sm max-w-[360px] w-full rounded-[36px] shadow-2xl overflow-hidden border-4 border-orange-300 relative my-4">
+    <div class="bg-white/95 backdrop-blur-sm max-w-[375px] w-full rounded-[36px] shadow-2xl overflow-hidden border-4 border-orange-300 relative my-4">
 
         <div class="h-32 bg-gradient-to-r from-orange-300 via-amber-300 to-yellow-300 relative">
-            <div class="absolute inset-0 flex items-center justify-center opacity-40 text-white text-4xl font-bold tracking-widest">
+            <div class="absolute inset-0 flex items-center justify-center opacity-40 text-white text-5xl font-bold tracking-widest">
                 CHIRO MURA
             </div>
         </div>
@@ -30,7 +31,7 @@
 
             <div class="relative -mt-16 mb-2 flex justify-center">
                 <div class="w-32 h-32 rounded-full border-[5px] border-white shadow-lg bg-orange-50 flex items-center justify-center overflow-hidden z-10">
-                    <img src="https://chiromura.github.io/noriko-card/chiro_mura_logo.png" alt="チロ村ロゴ" class="w-full h-full object-cover">
+                    <img src="chiro_mura_logo.png" alt="チロ村ロゴ" class="w-full h-full object-cover">
                 </div>
                 <div class="absolute bottom-1 bg-gray-800 text-white text-xs font-bold px-4 py-1 rounded-full border-2 border-white shadow-md z-20">
                     屋号：チロ村 🐕
@@ -62,7 +63,7 @@
                 </a>
             </div>
 
-            <div class="bg-orange-50 rounded-3xl p-4 border-2 border-orange-100 text-left mb-8">
+            <div class="bg-orange-50 rounded-3xl p-4 border-2 border-orange-100 text-left mb-10 shadow-inner">
                 <ul class="space-y-4">
                     <li class="flex items-start">
                         <span class="bg-purple-400 text-white rounded-full w-8 h-8 flex-shrink-0 flex items-center justify-center mr-2 text-lg shadow-sm mt-1">⚡</span>
@@ -88,49 +89,154 @@
                 </ul>
             </div>
 
-            <div class="border-t-4 border-orange-100 pt-6 mb-6 text-center">
-                <h2 class="text-base font-bold text-orange-500 mb-6 bg-orange-100 inline-block px-4 py-1 rounded-full whitespace-nowrap">
-                    🛠️ こんなこと、できちゃいます
-                </h2>
 
-                <div class="text-left px-2">
-                    <div class="mb-5">
-                        <h3 class="font-bold text-gray-700 flex items-center mb-1 text-sm whitespace-nowrap">
-                            <span class="text-lg mr-2">💻</span> デジタル建築（Web制作）
-                        </h3>
-                        <ul class="text-xs text-gray-600 space-y-1 pl-6 list-disc font-bold">
-                            <li>名刺代わりの「自己紹介サイト」</li>
-                            <li>想いが伝わる「ランディングページ」</li>
-                            <li>人生をWebに残す「デジタル自分史」</li>
-                        </ul>
+            <div class="border-t-4 border-dashed border-orange-200 pt-8 mb-6 relative">
+                <div class="text-center mb-8 relative z-10">
+                    <h2 class="text-xl font-bold bg-orange-400 text-white px-6 py-3 rounded-full shadow-md inline-block transform -rotate-2 border-4 border-white">
+                        🛠️ 私ができること
+                    </h2>
+                    <div class="absolute -top-4 -right-1 bg-yellow-300 text-orange-800 text-[10px] font-bold px-2 py-1 rounded-full border-2 border-white shadow-md animate-bounce leading-tight">
+                        これでも<br>一部です!
                     </div>
+                    <p class="mt-3 text-sm font-bold text-gray-500 inline-block">
+                        「こんなこと頼める？」って気軽に聞いてね😊
+                    </p>
+                </div>
 
-                    <div class="mb-5">
-                        <h3 class="font-bold text-gray-700 flex items-center mb-1 text-sm whitespace-nowrap">
-                            <span class="text-lg mr-2">✍️</span> 想いの翻訳（言葉・編集）
-                        </h3>
-                        <ul class="text-xs text-gray-600 space-y-1 pl-6 list-disc font-bold">
-                            <li>脳内を整理する「壁打ち＆図解」</li>
-                            <li>魅力発掘「プロフィール作成」</li>
-                            <li>AIと一緒に「魔法のライティング」</li>
-                        </ul>
-                    </div>
+                <div class="bg-white p-5 rounded-3xl shadow-md border-4 border-blue-200 mb-6 relative">
+                    <div class="absolute -top-3 left-4 bg-blue-100 text-blue-600 text-xl w-10 h-10 flex items-center justify-center rounded-full border-2 border-white shadow-sm">💻</div>
+                    <h3 class="text-lg font-bold text-blue-600 mb-3 pl-12 pt-1 leading-tight">
+                        パソコン・スマホ<br>デザインのお手伝い
+                    </h3>
+                    <ul class="space-y-4 text-sm font-bold text-gray-600">
+                        <li class="flex items-start bg-blue-50 p-2 rounded-lg -ml-2">
+                            <span class="text-2xl mr-2">📢</span>
+                            <div>
+                                <span class="block text-blue-800 text-base">あなたの「好き」や「伝えたい事」を広げます！</span>
+                                <span class="text-xs text-blue-600 font-normal">Webやデザインの力で、あなたの想いを世界に届けます✨</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-blue-400 mr-2">●</span>
+                            <div>
+                                <span class="block text-gray-800">私だけのホームページ作り</span>
+                                <span class="text-xs text-gray-400 font-normal">AIとお喋り感覚で作成！</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-blue-400 mr-2">●</span>
+                            <div>
+                                <span class="block text-gray-800">Canvaで「可愛い画像」制作 🎨</span>
+                                <span class="text-xs text-gray-400 font-normal">チラシ・名刺・インスタ投稿など</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-blue-400 mr-2">●</span>
+                            <div>
+                                <span class="block text-gray-800">スマホ動画の「イイ感じ」編集 🎥</span>
+                                <span class="text-xs text-gray-400 font-normal">思い出を素敵なムービーにします</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
 
-                    <div class="mb-5">
-                        <h3 class="font-bold text-gray-700 flex items-center mb-1 text-sm whitespace-nowrap">
-                            <span class="text-lg mr-2">🎨</span> アナログ支援 ＆ 磁場調整
-                        </h3>
-                        <ul class="text-xs text-gray-600 space-y-1 pl-6 list-disc font-bold">
-                            <li>ご機嫌な「名刺・チラシ」デザイン</li>
-                            <li>スマホ・PC「苦手意識ぶっ壊し」講座</li>
-                            <li>会うだけで元気になる「お茶会」🍵</li>
-                        </ul>
+                <div class="bg-white p-5 rounded-3xl shadow-md border-4 border-yellow-200 mb-6 relative">
+                    <div class="absolute -top-3 left-4 bg-yellow-100 text-yellow-600 text-xl w-10 h-10 flex items-center justify-center rounded-full border-2 border-white shadow-sm">🎉</div>
+                    <h3 class="text-lg font-bold text-yellow-600 mb-3 pl-12 pt-1 leading-tight">
+                        お祭り・イベント<br>作戦会議
+                    </h3>
+                    <ul class="space-y-3 text-sm font-bold text-gray-600">
+                        <li class="flex items-start">
+                            <span class="text-yellow-400 mr-2">●</span>
+                            <div>
+                                <span class="block text-gray-800">イベント・マルシェ企画</span>
+                                <span class="text-xs text-gray-400 font-normal">「やりたい！」を形にします</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-yellow-400 mr-2">●</span>
+                            <div>
+                                <span class="block text-gray-800">人が集まる「場」づくり</span>
+                                <span class="text-xs text-gray-400 font-normal">誰でも馴染める空気を作ります</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-5 rounded-3xl shadow-md border-4 border-pink-200 mb-6 relative">
+                    <div class="absolute -top-3 left-4 bg-pink-100 text-pink-600 text-xl w-10 h-10 flex items-center justify-center rounded-full border-2 border-white shadow-sm">🗣️</div>
+                    <h3 class="text-lg font-bold text-pink-600 mb-3 pl-12 pt-1 leading-tight">
+                        人生と心の<br>おしゃべり整理
+                    </h3>
+                    <ul class="space-y-3 text-sm font-bold text-gray-600">
+                        <li class="flex items-start">
+                            <span class="text-pink-400 mr-2">●</span>
+                            <div>
+                                <span class="block text-gray-800">5年後の未来地図ワーク</span>
+                                <span class="text-xs text-gray-400 font-normal">ワクワクする未来を一緒に妄想！</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-pink-400 mr-2">●</span>
+                            <div>
+                                <span class="block text-gray-800">オラクルカードでヒント探し 🔮</span>
+                                <span class="text-xs text-gray-400 font-normal">迷った時の道しるべになります</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-pink-400 mr-2">●</span>
+                            <div>
+                                <span class="block text-gray-800">ゆるっと話して元気になる会</span>
+                                <span class="text-xs text-gray-400 font-normal">気づいたら元気になってる不思議な時間</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-5 rounded-3xl shadow-md border-4 border-purple-200 mb-8 relative">
+                    <div class="absolute -top-3 left-4 bg-purple-100 text-purple-600 text-xl w-10 h-10 flex items-center justify-center rounded-full border-2 border-white shadow-sm">⚡</div>
+                    <h3 class="text-lg font-bold text-purple-600 mb-3 pl-12 pt-1 leading-tight">
+                        会うだけで<br>元気注入！
+                    </h3>
+                    
+                    <ul class="space-y-4 text-sm font-bold text-gray-600">
+                        <li class="bg-purple-50 p-3 rounded-xl border-2 border-purple-100 -ml-1 shadow-sm relative overflow-hidden">
+                            <div class="absolute top-0 right-0 bg-yellow-400 text-orange-900 text-[9px] font-bold px-3 py-0.5 transform rotate-12 translate-x-2 -translate-y-1 shadow-sm">
+                                一番オススメ!
+                            </div>
+                            <div class="flex items-center mb-1">
+                                <span class="text-xl mr-2">👽</span>
+                                <span class="block text-purple-700 text-base font-bold">とりあえず「レンタルのりちゃん」</span>
+                            </div>
+                            <p class="text-xs text-gray-600 leading-snug font-normal">
+                                百聞は一見にしかず。とにかく会ったら分かる、のりちゃんの<span class="text-pink-500 font-bold">ご機嫌キラキラパワー</span>と<span class="text-pink-500 font-bold">神的な浄化力</span>を体験してみよう✨
+                            </p>
+                        </li>
+
+                        <li class="flex items-start">
+                            <span class="text-purple-400 mr-2">●</span>
+                            <div>
+                                <span class="block text-gray-800">気になるお店・会場を「一緒に見学」</span>
+                                <span class="text-xs text-gray-400 font-normal">一人じゃ行きにくい場所もご一緒に♪</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-purple-400 mr-2">●</span>
+                            <div>
+                                <span class="block text-gray-800">人や場所の「勝手にリサーチ」代行</span>
+                                <span class="text-xs text-gray-400 font-normal">のりちゃん独自の視点で調査します！</span>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="mt-3 text-right">
+                        <span class="text-xs text-pink-500 font-bold bg-pink-50 px-2 py-1 rounded">※交通費は別途♡</span>
                     </div>
                 </div>
+
             </div>
 
-            <div class="text-center mt-8 mb-8">
-                <p class="font-bold text-sm mb-4 text-orange-600 whitespace-nowrap tracking-tight">この宇宙人と一緒に何かしたくなった？</p>
+            <div class="text-center mt-2 mb-8">
+                <p class="font-bold text-sm mb-4 text-orange-600 whitespace-nowrap tracking-tight animate-bounce">この宇宙人と一緒に何かしたくなった？👇</p>
                 <a href="https://www.instagram.com/nononoriko.k" target="_blank" class="block w-full bg-gradient-to-r from-pink-400 to-yellow-400 text-white font-bold text-lg py-4 rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition duration-200 border-4 border-white animate-pulse">
                     DMでコンタクトをとる 💌
                 </a>
