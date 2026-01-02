@@ -79,6 +79,7 @@
             max-width: 1000px;
             margin: 0 auto 60px;
             padding: 0 20px;
+            box-sizing: border-box;
         }
 
         /* ナビゲーション */
@@ -103,7 +104,7 @@
             box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
             transition: all 0.2s;
             font-size: 1.1rem;
-            white-space: nowrap; /* 文字の折り返し禁止 */
+            white-space: nowrap;
         }
 
         .main-nav a:nth-child(1) { border-bottom-color: var(--event-color); }
@@ -133,9 +134,9 @@
         /* カードスタイル */
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 40px;
-            padding: 20px;
+            padding: 20px 0;
         }
 
         .card {
@@ -147,6 +148,8 @@
             position: relative;
             border: none;
             transition: transform 0.3s ease;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         .card::before {
@@ -203,7 +206,7 @@
             margin: 80px auto 40px;
             max-width: 800px;
             display: flex;
-            align-items: center;
+            align-items: flex-start; /* 上揃えに変更 */
             gap: 40px;
             box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
             position: relative;
@@ -231,7 +234,17 @@
             box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
         }
         .profile-img-box img { width: 100%; height: 100%; object-fit: cover; }
-        .profile-content h3 { font-family: 'Yomogi', cursive; font-size: 1.8rem; color: var(--text-color); margin-top: 0; border-bottom: 3px dotted var(--primary-color); display: inline-block;}
+        
+        .profile-content h3 { 
+            font-family: 'Yomogi', cursive; 
+            font-size: 1.8rem; 
+            color: var(--text-color); 
+            margin-top: 0; 
+            margin-bottom: 10px;
+            border-bottom: 3px dotted var(--primary-color); 
+            display: inline-block;
+            line-height: 1.4;
+        }
         .profile-content p { font-size: 1rem; color: #5D4037; margin-bottom: 15px; }
 
         /* メッセージセクション */
@@ -266,21 +279,30 @@
             box-shadow: 5px 5px 0 rgba(255, 183, 77, 0.2);
         }
         .cta-section::before { content: "📎"; font-size: 3rem; position: absolute; top: -25px; left: 20px; transform: rotate(-15deg); color: #5D4037; }
+        
         .btn {
-            background-color: var(--primary-color);
+            background-color: #f0a5bf;
             color: white;
-            padding: 15px 45px;
+            padding: 15px 30px;
             border-radius: 50px;
             text-decoration: none;
             font-family: 'Yomogi', cursive;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             font-weight: bold;
-            box-shadow: 0 5px 0px #E65100;
+            box-shadow: 0 5px 0px #C13584;
             transition: all 0.2s;
             display: inline-block;
             margin-top: 25px;
+            line-height: 1.4;
         }
-        .btn:hover { transform: translateY(3px); box-shadow: 0 2px 0px #E65100; background-color: #FFB300; }
+        .btn:hover { transform: translateY(3px); box-shadow: 0 2px 0px #C13584; background-color: #C13584; }
+        
+        .small-note {
+            font-size: 0.8rem;
+            color: #8D6E63;
+            margin-top: 10px;
+            opacity: 0.8;
+        }
 
         footer {
             text-align: center;
@@ -298,52 +320,41 @@
            スマホ最適化 (レスポンシブ対応)
            ========================================= */
         @media (max-width: 600px) {
-            /* 全体の余白調整 */
             .container { padding: 0 15px; }
-
-            /* ヘッダー周り */
             h1 { font-size: 1.6rem; padding: 10px 20px; line-height: 1.4; }
-            .back-to-top span { display: none; } /* 「トップに戻る」の文字を消してアイコンのみに */
+            .back-to-top span { display: none; }
             .back-to-top { font-size: 1.2rem; background: #fff; width: 40px; height: 40px; justify-content: center; border-radius: 50%; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
 
-            /* ナビゲーション（横スクロール化） */
             .main-nav {
-                justify-content: flex-start; /* 左寄せ */
-                flex-wrap: nowrap; /* 折り返さない */
-                overflow-x: auto; /* 横スクロール許可 */
-                padding-bottom: 10px; /* スクロールバーの干渉を防ぐ */
-                -webkit-overflow-scrolling: touch; /* 滑らかスクロール */
-                margin: 20px -15px 40px; /* 画面端まで広げる */
-                padding-left: 15px; /* 左端の余白 */
+                justify-content: flex-start;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                padding-bottom: 10px;
+                -webkit-overflow-scrolling: touch;
+                margin: 20px -15px 40px;
+                padding-left: 15px;
             }
             .main-nav a { flex-shrink: 0; font-size: 0.95rem; padding: 10px 15px; }
 
-            /* カードとグリッド */
             .services-grid { grid-template-columns: 1fr; padding: 0; gap: 30px; }
-            .card { padding: 30px 20px; margin-bottom: 10px; }
-            /* スマホでは傾きをリセット（まっすぐに）して読みやすく */
+            .card { padding: 30px 20px; margin-bottom: 10px; width: 100%; max-width: 100%; }
             .card:nth-child(odd), .card:nth-child(even), .cta-section, .section-title { transform: rotate(0deg); }
-            /* マステの位置調整 */
             .card::before { width: 100px; height: 30px; top: -12px; }
 
-            /* プロフィールセクション */
             .profile-section {
                 flex-direction: column;
                 text-align: center;
                 gap: 20px;
-                border-width: 8px; /* 枠を少し細く */
+                border-width: 8px;
                 padding: 30px 20px;
-                transform: rotate(0deg); /* 傾き解除 */
+                transform: rotate(0deg);
             }
             .profile-img-box { margin: 0 auto; width: 160px; height: 160px; }
 
-            /* メッセージセクション */
             .message-section { padding: 30px 20px; background-size: 100% 2.2em; line-height: 2.2em; }
-            
-            /* CTAセクション */
             .cta-section { padding: 40px 20px; }
             .cta-text { font-size: 1.2rem !important; }
-            .btn { width: 100%; box-sizing: border-box; padding: 15px 20px; font-size: 1.1rem; }
+            .btn { width: 100%; box-sizing: border-box; padding: 15px 20px; font-size: 1.0rem; }
         }
     </style>
 </head>
@@ -360,10 +371,12 @@
 
         <nav class="main-nav">
             <a href="#menu">メニュー一覧</a>
-            <a href="#about">魔法使いの紹介</a>
+            <a href="#about">のりちゃん紹介</a>
             <a href="#message">制作への想い</a>
             <a href="#contact">相談ポスト</a>
         </nav>
+
+        <h2 id="menu" class="section-title">Menu / できること一覧</h2>
 
         <div class="services-grid">
             
@@ -475,17 +488,33 @@
                 <img src="plofile_img.png" alt="のりちゃんの写真">
             </div>
             <div class="profile-content">
-                <h3><i class="fa-solid fa-hat-wizard" style="color:var(--primary-color);"></i> 魔法使い：のりちゃん</h3>
+                <h3>
+                    <i class="fa-solid fa-hat-wizard" style="color:var(--primary-color);"></i> 
+                    きたがわ のりこ
+                    <span style="font-size:0.6em; display:block; margin-top:5px; color:#6D4C41; font-weight:normal;">
+                        （北川 雅子 / のりちゃん）
+                    </span>
+                </h3>
                 <p>
                     <strong>「ヒト・モノ・コト。ありとあらゆる可能性の架け橋」</strong><br>
                     滋賀県長浜市を拠点に活動中。<br>
-                    実は、小学生の頃からパソコンが大好き！<br>
-                    デジタル・アナログ問わず、お絵描きや文字を書くのが趣味です。
-                </p>
-                <p>
+                    人と繋がり、人を知ることが好き。<br>
+                    人とすぐに仲良くなって打ち解けられる才能がある<br><br>
+                    
                     自分の「好き」でワクワクしながら、誰かの力になれるなら、そのために技術を使いたい。<br>
                     難しい専門用語は使いません。あなたのペースで、一緒にワクワクを作りましょう！
                 </p>
+                
+                <div style="margin-top: 20px; padding-top: 20px; border-top: 2px dashed #FFB74D;">
+                    <p style="margin-bottom: 0; font-weight: bold; color: #E65100;">
+                        <i class="fa-regular fa-handshake"></i> 大切にしていること
+                    </p>
+                    <p style="font-size: 0.95rem; margin-top: 10px;">
+                        やりとりはLINE・Zoom・対面など、あなたの一番ラクな方法でOK！<br>
+                        お互いが「安心感」と「信頼感」を感じながらワクワクを共に創り上げることを大切にしています🎁
+                    </p>
+                </div>
+
             </div>
         </div>
 
@@ -520,17 +549,19 @@
                 デジタルのお悩みも、<br>リアルな「やりたい！」も。<br>
                 まずは「こんなことできる？」と<br>お気軽に声をかけてくださいね 😊
             </p>
-            <a href="#" class="btn">
-                <i class="fa-regular fa-envelope"></i> 魔法使いに相談してみる
+            
+            <a href="https://www.instagram.com/nononoriko.k/" class="btn" target="_blank" rel="noopener noreferrer">
+                <i class="fa-brands fa-instagram"></i> とりあえずDMで声かけてみる♡
             </a>
+            <p class="small-note">※Instagramに飛びます</p>
         </div>
     </div>
 
     <footer>
         <a href="https://chiromura.github.io/noriko/" class="footer-back-btn">
-            <i class="fa-solid fa-home"></i> トップページ（名刺）に戻る
+            <i class="fa-solid fa-home"></i> トップページに戻る
         </a>
-        <p>&copy; 2024 Digital Concierge Nori-chan. All Rights Reserved.</p>
+        <p>&copy; 2025 Chiromura All Rights Reserved.</p>
     </footer>
 
 </body>
