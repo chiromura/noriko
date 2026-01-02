@@ -4,523 +4,238 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>私のできることメニュー | デジタル・コンシェルジュ のりちゃん</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Yomogi&family=Zen+Maru+Gothic:wght@500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root {
-            /* 配色パレット */
-            --primary-color: #FFB74D;
-            --secondary-color: #FFAB91;
-            --accent-color: #FFF59D;
-            --bg-color: #FFF8E1;
-            --text-color: #5D4037;
-            --card-bg: #FFFFFF;
-            --line-color: #e0d3bc;
-
-            /* 追加メニュー用カラー */
-            --event-color: #FFF176;
-            --heart-color: #F8BBD0;
-            --power-color: #E1BEE7;
+        body { 
+            font-family: 'Zen Maru Gothic', sans-serif; 
         }
-
-        html { scroll-behavior: smooth; }
-
-        body {
-            font-family: 'Zen Maru Gothic', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: var(--bg-color);
-            background-image: repeating-linear-gradient(transparent, transparent 29px, var(--line-color) 30px);
-            background-size: 100% 30px;
-            background-attachment: local;
-            color: var(--text-color);
-            line-height: 1.8;
-            overflow-x: hidden; /* 横揺れ防止 */
-        }
-
-        /* ヘッダー */
-        header {
-            background-color: #fff;
-            background-image: url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23FFB74D' fill-opacity='0.2' fill-rule='evenodd'%3E%3Cpath d='M5 0h1L0 6V5zM6 5v1H5z'/%3E%3C/g%3E%3C/svg%3E");
-            padding: 40px 20px;
-            text-align: center;
-            border-bottom: 3px dashed var(--primary-color);
-            position: relative;
-        }
-
-        h1 {
+        h1, h2, h3, .yomogi-font {
             font-family: 'Yomogi', cursive;
-            font-size: 2.2rem;
-            margin: 0;
-            color: var(--text-color);
-            display: inline-block;
-            background: #fff;
-            padding: 10px 30px;
-            border-radius: 50px;
-            border: 3px dotted var(--primary-color);
-            transform: rotate(-2deg);
         }
-
-        .back-to-top {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            font-family: 'Yomogi', cursive;
-            text-decoration: none;
-            color: var(--secondary-color);
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        .back-to-top:hover { color: var(--primary-color); }
-
-        .container {
-            max-width: 1000px;
-            margin: 0 auto 60px;
-            padding: 0 20px;
-            box-sizing: border-box;
-        }
-
-        /* ナビゲーション */
-        .main-nav {
-            text-align: center;
-            margin: 30px 0 50px;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .main-nav a {
-            display: inline-block;
-            background-color: var(--card-bg);
-            color: var(--text-color);
-            font-family: 'Yomogi', cursive;
-            text-decoration: none;
-            padding: 12px 25px;
-            border-radius: 10px 10px 5px 5px;
-            border-bottom: 4px solid var(--primary-color);
-            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
-            transition: all 0.2s;
-            font-size: 1.1rem;
-            white-space: nowrap;
-        }
-
-        .main-nav a:nth-child(1) { border-bottom-color: var(--event-color); }
-        .main-nav a:nth-child(2) { border-bottom-color: var(--heart-color); }
-        .main-nav a:nth-child(3) { border-bottom-color: var(--power-color); }
-        .main-nav a:hover { top: -5px; background-color: #FFFDE7; }
-
-        .section-title {
-            text-align: center;
-            font-family: 'Yomogi', cursive;
-            font-size: 2rem;
-            color: var(--text-color);
-            margin-bottom: 40px;
-            margin-top: 60px;
-            position: relative;
-            display: inline-block;
-            left: 50%;
-            transform: translateX(-50%) rotate(-3deg);
-            background: #fff;
-            padding: 5px 20px;
-            border: 2px dashed var(--secondary-color);
-            box-shadow: 3px 3px 0 rgba(255, 171, 145, 0.3);
-            width: max-content;
-            max-width: 90%;
+        /* 背景：ご機嫌な水玉模様 */
+        .pop-bg {
+            background-color: #fffbeb;
+            background-image: radial-gradient(#FDBA74 2px, transparent 2px);
+            background-size: 24px 24px;
         }
         
-        /* カードスタイル */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 40px;
-            padding: 20px 0;
-        }
-
-        .card {
-            background: var(--card-bg);
-            background-image: linear-gradient(to right, rgba(255,255,255,0.9), rgba(255,248,225,0.9));
-            border-radius: 10px;
-            padding: 35px 25px;
-            box-shadow: 5px 5px 15px rgba(0,0,0,0.08);
-            position: relative;
-            border: none;
-            transition: transform 0.3s ease;
-            width: 100%;
-            box-sizing: border-box;
-        }
-
-        .card::before {
-            content: "";
-            position: absolute;
-            top: -15px;
-            left: 50%;
-            transform: translateX(-50%) rotate(-2deg);
-            width: 120px;
-            height: 35px;
-            background-color: rgba(255, 183, 77, 0.6);
-            mask-image: url("data:image/svg+xml,%3Csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='0' y='0' width='100%25' height='100%25' fill='white'/%3E%3C/svg%3E");
-            border-left: 2px dashed rgba(255,255,255,0.3);
-            border-right: 2px dashed rgba(255,255,255,0.3);
-            opacity: 0.8;
-            z-index: 1;
+        /* ユーティリティ */
+        .card-shadow {
+            box-shadow: 5px 5px 0px rgba(253, 186, 116, 0.4);
         }
         
-        .card:nth-child(odd) { transform: rotate(1.5deg); }
-        .card:nth-child(even) { transform: rotate(-1.5deg); }
-        .card:hover { transform: scale(1.02) rotate(0deg) !important; box-shadow: 8px 8px 20px rgba(0,0,0,0.12); z-index: 10; }
-
-        .card-icon { font-size: 3rem; color: var(--primary-color); margin-bottom: 15px; text-align: center; display: block; }
-        .card h3 { font-family: 'Yomogi', cursive; font-size: 1.5rem; margin-bottom: 15px; color: var(--text-color); text-align: center; background-image: linear-gradient(transparent 70%, var(--accent-color) 70%); display: inline-block; width: 100%; }
-        .card p { font-size: 0.95rem; color: #6D4C41; }
-        
-        .service-list { list-style: none; padding-left: 10px; margin-top: 20px; }
-        .service-list li { margin-bottom: 15px; position: relative; padding-left: 25px; font-size: 0.95rem; }
-        .service-list li::before { content: "✔"; font-family: 'Yomogi', cursive; color: var(--primary-color); position: absolute; left: 0; font-weight: bold; font-size: 1.2rem; }
-        .service-list li strong { display: block; color: #5D4037; font-size: 1.05rem; border-bottom: 2px dotted var(--line-color); }
-        .small-desc { font-size: 0.85rem; color: #8D6E63; display: block; margin-top: 5px; }
-        .highlight { background: linear-gradient(to top, var(--accent-color) 60%, transparent 60%); font-weight: bold; }
-
-        .rental-box {
-            background-color: #FFF9C4;
-            border: none;
-            border-left: 6px solid #FBC02D;
-            border-radius: 5px;
-            padding: 20px;
-            margin-bottom: 20px;
-            position: relative;
-            box-shadow: 3px 3px 8px rgba(0,0,0,0.1);
-            transform: rotate(-2deg);
+        /* カスタムアニメーション */
+        @keyframes pulse-slow {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
         }
-        .recommend-badge { position: absolute; top: -15px; right: -10px; background-color: #FF5252; color: #fff; font-family: 'Yomogi', cursive; padding: 5px 15px; border-radius: 30px; font-size: 0.9rem; font-weight: bold; box-shadow: 0 2px 5px rgba(0,0,0,0.2); transform: rotate(10deg); z-index: 10; border: 2px solid #fff; }
-        .rental-title { font-family: 'Yomogi', cursive; font-weight: bold; font-size: 1.3rem; color: #E65100; display: flex; align-items: center; gap: 10px; }
-        .note { text-align: right; font-size: 0.8rem; color: #E91E63; margin-top: 10px; font-family: 'Yomogi', cursive; }
-
-        /* プロフィールセクション */
-        .profile-section {
-            background-color: #fff;
-            border-radius: 10px;
-            padding: 40px;
-            margin: 80px auto 40px;
-            max-width: 800px;
-            display: flex;
-            align-items: flex-start; /* 上揃えに変更 */
-            gap: 40px;
-            box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
-            position: relative;
-            border: 15px solid #fff;
-            outline: 2px solid #eee;
-            transform: rotate(2deg);
-        }
-        .profile-section::before {
-            content: "";
-            position: absolute;
-            top: -25px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 150px;
-            height: 40px;
-            background-color: rgba(248, 187, 208, 0.7);
-            mask-image: url("data:image/svg+xml,%3Csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='0' y='0' width='100%25' height='100%25' fill='white'/%3E%3C/svg%3E");
-        }
-        .profile-img-box {
-            flex-shrink: 0;
-            width: 180px;
-            height: 180px;
-            background-color: #f0f0f0;
-            border: 5px solid #fff;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
-        }
-        .profile-img-box img { width: 100%; height: 100%; object-fit: cover; }
-        
-        .profile-content h3 { 
-            font-family: 'Yomogi', cursive; 
-            font-size: 1.8rem; 
-            color: var(--text-color); 
-            margin-top: 0; 
-            margin-bottom: 10px;
-            border-bottom: 3px dotted var(--primary-color); 
-            display: inline-block;
-            line-height: 1.4;
-        }
-        .profile-content p { font-size: 1rem; color: #5D4037; margin-bottom: 15px; }
-
-        /* メッセージセクション */
-        .message-section {
-            background-color: #fff;
-            max-width: 800px;
-            margin: 0 auto 60px;
-            padding: 50px 40px;
-            border-radius: 5px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            position: relative;
-            background-image: linear-gradient(#e0d3bc 1px, transparent 1px);
-            background-size: 100% 2em;
-            line-height: 2em;
-        }
-        .message-section h3 { font-family: 'Yomogi', cursive; text-align: center; font-size: 1.8rem; margin-bottom: 30px; color: var(--secondary-color); }
-        .message-body { font-size: 1.05rem; color: #4e342e; }
-        .message-body p { margin-bottom: 2em; }
-        .message-highlight { font-weight: bold; color: #D84315; background: rgba(255,224,178,0.3); }
-
-        /* CTAセクション */
-        .cta-section {
-            text-align: center;
-            margin: 60px auto;
-            padding: 50px 40px;
-            max-width: 700px;
-            background-color: #FFF8E1;
-            border: 3px dashed #FFB74D;
-            border-radius: 20px;
-            position: relative;
-            transform: rotate(-1deg);
-            box-shadow: 5px 5px 0 rgba(255, 183, 77, 0.2);
-        }
-        .cta-section::before { content: "📎"; font-size: 3rem; position: absolute; top: -25px; left: 20px; transform: rotate(-15deg); color: #5D4037; }
-        
-        .btn {
-            background-color: #f0a5bf;
-            color: white;
-            padding: 15px 30px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-family: 'Yomogi', cursive;
-            font-size: 1.2rem;
-            font-weight: bold;
-            box-shadow: 0 5px 0px #C13584;
-            transition: all 0.2s;
-            display: inline-block;
-            margin-top: 25px;
-            line-height: 1.4;
-        }
-        .btn:hover { transform: translateY(3px); box-shadow: 0 2px 0px #C13584; background-color: #C13584; }
-        
-        .small-note {
-            font-size: 0.8rem;
-            color: #8D6E63;
-            margin-top: 10px;
-            opacity: 0.8;
-        }
-
-        footer {
-            text-align: center;
-            padding: 40px 20px;
-            background-color: var(--primary-color);
-            color: white;
-            font-family: 'Yomogi', cursive;
-            margin-top: 60px;
-            border-top: 5px dotted #fff;
-        }
-        .footer-back-btn { display: inline-block; background: #fff; color: var(--primary-color); padding: 10px 30px; border-radius: 30px; text-decoration: none; font-weight: bold; margin-bottom: 20px; box-shadow: 0 3px 0 rgba(0,0,0,0.1); }
-        .footer-back-btn:hover { transform: translateY(2px); box-shadow: 0 1px 0 rgba(0,0,0,0.1); background-color: #FFFDE7; }
-
-        /* =========================================
-           スマホ最適化 (レスポンシブ対応)
-           ========================================= */
-        @media (max-width: 600px) {
-            .container { padding: 0 15px; }
-            h1 { font-size: 1.6rem; padding: 10px 20px; line-height: 1.4; }
-            .back-to-top span { display: none; }
-            .back-to-top { font-size: 1.2rem; background: #fff; width: 40px; height: 40px; justify-content: center; border-radius: 50%; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-
-            .main-nav {
-                justify-content: flex-start;
-                flex-wrap: nowrap;
-                overflow-x: auto;
-                padding-bottom: 10px;
-                -webkit-overflow-scrolling: touch;
-                margin: 20px -15px 40px;
-                padding-left: 15px;
-            }
-            .main-nav a { flex-shrink: 0; font-size: 0.95rem; padding: 10px 15px; }
-
-            .services-grid { grid-template-columns: 1fr; padding: 0; gap: 30px; }
-            .card { padding: 30px 20px; margin-bottom: 10px; width: 100%; max-width: 100%; }
-            .card:nth-child(odd), .card:nth-child(even), .cta-section, .section-title { transform: rotate(0deg); }
-            .card::before { width: 100px; height: 30px; top: -12px; }
-
-            .profile-section {
-                flex-direction: column;
-                text-align: center;
-                gap: 20px;
-                border-width: 8px;
-                padding: 30px 20px;
-                transform: rotate(0deg);
-            }
-            .profile-img-box { margin: 0 auto; width: 160px; height: 160px; }
-
-            .message-section { padding: 30px 20px; background-size: 100% 2.2em; line-height: 2.2em; }
-            .cta-section { padding: 40px 20px; }
-            .cta-text { font-size: 1.2rem !important; }
-            .btn { width: 100%; box-sizing: border-box; padding: 15px 20px; font-size: 1.0rem; }
+        .animate-pulse-slow {
+            animation: pulse-slow 3s infinite;
         }
     </style>
 </head>
-<body>
+<body class="pop-bg text-[#5D4037] leading-loose">
 
-    <header>
-        <a href="https://chiromura.github.io/noriko/" class="back-to-top">
-            <i class="fa-solid fa-chevron-left"></i> <span>トップに戻る</span>
-        </a>
-        <h1>私のできることメニュー</h1>
+    <header class="bg-white/90 backdrop-blur-sm sticky top-0 z-50 border-b-4 border-orange-300 shadow-sm py-4 px-4 text-center">
+        <div class="max-w-4xl mx-auto relative flex items-center justify-center">
+            <a href="https://chiromura.github.io/noriko/" class="absolute left-0 text-orange-500 hover:text-orange-600 font-bold flex items-center gap-1 transition text-sm sm:text-base">
+                <i class="fa-solid fa-chevron-left"></i> <span class="hidden sm:inline">トップに戻る</span>
+            </a>
+            <h1 class="text-xl sm:text-2xl font-bold text-orange-600 tracking-wide bg-orange-50 px-4 py-1 rounded-full border-2 border-orange-200">
+                🛠️ 私のできることメニュー
+            </h1>
+        </div>
     </header>
 
-    <div class="container">
+    <div class="max-w-4xl mx-auto px-4 py-8 pb-20">
 
-        <nav class="main-nav">
-            <a href="#menu">メニュー一覧</a>
-            <a href="#about">のりちゃん紹介</a>
-            <a href="#message">制作への想い</a>
-            <a href="#contact">相談ポスト</a>
+        <nav class="flex justify-center gap-3 mb-12 flex-wrap text-sm sm:text-base">
+            <a href="#menu" class="bg-white px-4 py-2 rounded-xl border-b-4 border-yellow-300 shadow-sm hover:-translate-y-1 transition duration-200 font-bold text-yellow-700">メニュー一覧</a>
+            <a href="#about" class="bg-white px-4 py-2 rounded-xl border-b-4 border-pink-300 shadow-sm hover:-translate-y-1 transition duration-200 font-bold text-pink-600">のりちゃん紹介</a>
+            <a href="#message" class="bg-white px-4 py-2 rounded-xl border-b-4 border-blue-300 shadow-sm hover:-translate-y-1 transition duration-200 font-bold text-blue-600">制作への想い</a>
+            <a href="#contact" class="bg-white px-4 py-2 rounded-xl border-b-4 border-purple-300 shadow-sm hover:-translate-y-1 transition duration-200 font-bold text-purple-600">相談ポスト</a>
         </nav>
 
-        <div class="services-grid">
-            
-            <article class="card">
-                <i class="fa-regular fa-gem card-icon"></i>
-                <h3>自分だけのホームページ<br><span style="font-size:0.8em">（人生の宝箱づくり）</span></h3>
-                <p>
-                    「私なんて普通の人生だし…」なんて言わせません！<br>
-                    あなたの人生は、磨けばもっと輝く<span class="highlight"> ダイヤの原石 </span>。<br>
-                    埋もれていた経験や想いを、私と一緒に<span class="highlight"> 「ずっと残るWebサイト」 </span>という形にしませんか？
-                </p>
-            </article>
+        <div id="menu" class="mb-16">
+            <div class="text-center mb-8">
+                <h2 class="inline-block text-2xl font-bold bg-white px-6 py-2 rounded-full border-4 border-orange-200 shadow-md text-orange-600 transform -rotate-2">
+                    Menu / できること一覧
+                </h2>
+            </div>
 
-            <article class="card alchemy">
-                <i class="fa-solid fa-flask-vial card-icon"></i>
-                <h3>情報の錬金術<br><span style="font-size:0.8em">（コンテンツ化の魔法）</span></h3>
-                <p>
-                    <strong>お喋りするだけでOK！</strong><br>
-                    デジタルが苦手でも大丈夫。あなたが当たり前だと思っている経験も、磨けば輝く<span class="highlight"> ダイヤの原石 </span>です。<br>
-                    素材を渡すだけで、あなたの人生や想いを<span class="highlight"> キラキラのWebコンテンツ </span>に変身させ、生きた証として残します✨
-                </p>
-            </article>
-
-            <article class="card">
-                <i class="fa-solid fa-palette card-icon"></i>
-                <h3>Canvaで<br>「魅せる」画像づくり</h3>
-                <p>
-                    インスタの投稿、名刺、チラシ……。<br>
-                    あなたの想いや希望に合わせて、<span class="highlight"> 「これ素敵！」 </span>と言われるデザインを創ります。<br>
-                    世界観を統一して、もっとファンを増やしましょう🎨
-                </p>
-            </article>
-
-            <article class="card">
-                <i class="fa-solid fa-tent card-icon" style="color: #FBC02D;"></i>
-                <h3>お祭り・イベント<br>作戦会議</h3>
-                <ul class="service-list">
-                    <li>
-                        <strong>イベント・マルシェ企画</strong>
-                        <span class="small-desc">あなたの「やりたい！」を形にします。</span>
-                    </li>
-                    <li>
-                        <strong>人が集まる「場」づくり</strong>
-                        <span class="small-desc">誰でも馴染める温かい空気を作ります。</span>
-                    </li>
-                </ul>
-            </article>
-
-            <article class="card">
-                <i class="fa-solid fa-comments card-icon" style="color: #F48FB1;"></i>
-                <h3>人生と心の<br>おしゃべり整理</h3>
-                <ul class="service-list">
-                    <li>
-                        <strong>5年後の未来地図ワーク</strong>
-                        <span class="small-desc">ワクワクする未来を一緒に妄想しましょう！</span>
-                    </li>
-                    <li>
-                        <strong>オラクルカードでヒント探し 🔮</strong>
-                        <span class="small-desc">迷った時の優しい道しるべになります。</span>
-                    </li>
-                    <li>
-                        <strong>ゆるっと話して元気になる会</strong>
-                        <span class="small-desc">気づいたら元気になってる不思議な時間☕</span>
-                    </li>
-                </ul>
-            </article>
-
-            <article class="card">
-                <i class="fa-solid fa-bolt card-icon" style="color: #AB47BC;"></i>
-                <h3>会うだけで<br>元気注入！</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 
-                <div class="rental-box">
-                    <span class="recommend-badge">一番オススメ！</span>
-                    <div class="rental-title">
-                        <i class="fa-regular fa-face-smile-wink"></i> とりあえず<br>「レンタルのりちゃん」
+                <article class="bg-white p-6 rounded-3xl border-4 border-blue-100 card-shadow hover:-translate-y-1 transition duration-300 relative overflow-hidden group">
+                    <div class="absolute -right-4 -top-4 w-20 h-20 bg-blue-100 rounded-full opacity-50 group-hover:scale-150 transition duration-500"></div>
+                    <div class="text-center mb-4 relative z-10">
+                        <i class="fa-regular fa-gem text-4xl text-blue-400 mb-2 block"></i>
+                        <h3 class="text-xl font-bold text-blue-600 border-b-2 border-blue-100 border-dashed inline-block pb-1">自分だけのホームページ</h3>
+                        <span class="block text-xs text-blue-400 font-bold mt-1">（人生の宝箱づくり）</span>
                     </div>
-                    <p style="font-size:0.9rem; margin-top:10px; margin-bottom:0; color:#5D4037;">
-                        百聞は一見にしかず。とにかく会ったら分かる、のりちゃんの<span style="color:#E91E63; font-weight:bold; border-bottom:2px solid #E91E63;">ご機嫌キラキラパワー</span>と<span style="color:#9C27B0; font-weight:bold; border-bottom:2px solid #9C27B0;">神的な浄化力</span>を体験してみよう✨
+                    <p class="text-sm font-bold text-gray-600 relative z-10">
+                        「私なんて普通の人生だし…」なんて言わせません！<br>
+                        あなたの人生は、磨けばもっと輝く<span class="bg-blue-100 text-blue-700 px-1 rounded">ダイヤの原石</span>。<br>
+                        埋もれていた経験や想いを、私と一緒に<span class="bg-blue-100 text-blue-700 px-1 rounded">「ずっと残るWebサイト」</span>という形にしませんか？
                     </p>
-                </div>
+                </article>
 
-                <ul class="service-list">
-                    <li>
-                        <strong>気になるお店・会場を「一緒に見学」</strong>
-                        <span class="small-desc">一人じゃ行きにくい場所もご一緒に🎵</span>
-                    </li>
-                    <li>
-                        <strong>人や場所の「勝手にリサーチ」代行</strong>
-                        <span class="small-desc">のりちゃん独自の視点で調査します！</span>
-                    </li>
-                </ul>
-                <div class="note">※交通費は別途♡</div>
-            </article>
+                <article class="bg-white p-6 rounded-3xl border-4 border-green-100 card-shadow hover:-translate-y-1 transition duration-300 relative overflow-hidden group">
+                    <div class="absolute -right-4 -top-4 w-20 h-20 bg-green-100 rounded-full opacity-50 group-hover:scale-150 transition duration-500"></div>
+                    <div class="text-center mb-4 relative z-10">
+                        <i class="fa-solid fa-flask-vial text-4xl text-green-400 mb-2 block"></i>
+                        <h3 class="text-xl font-bold text-green-600 border-b-2 border-green-100 border-dashed inline-block pb-1">情報の錬金術</h3>
+                        <span class="block text-xs text-green-400 font-bold mt-1">（コンテンツ化の魔法）</span>
+                    </div>
+                    <p class="text-sm font-bold text-gray-600 relative z-10">
+                        <strong>お喋りするだけでOK！</strong><br>
+                        デジタルが苦手でも大丈夫。あなたが当たり前だと思っている経験も、磨けば輝く<span class="bg-green-100 text-green-700 px-1 rounded">ダイヤの原石</span>です。<br>
+                        素材を渡すだけで、あなたの人生や想いを<span class="bg-green-100 text-green-700 px-1 rounded">キラキラのWebコンテンツ</span>に変身させ、生きた証として残します✨
+                    </p>
+                </article>
 
-            <article class="card">
-                <i class="fa-solid fa-life-ring card-icon"></i>
-                <h3>パソコン・スマホの<br>「困った！」解決</h3>
-                <p>
-                    「この画面なに？」「設定がわからん！」<br>
-                    そんな時は、隣に座って一緒に解決します。<br>
-                    <span class="highlight"> あなた専属の「デジタル・コンシェルジュ」 </span>として頼ってください☕
-                </p>
-            </article>
+                <article class="bg-white p-6 rounded-3xl border-4 border-yellow-100 card-shadow hover:-translate-y-1 transition duration-300 relative overflow-hidden group">
+                    <div class="absolute -right-4 -top-4 w-20 h-20 bg-yellow-100 rounded-full opacity-50 group-hover:scale-150 transition duration-500"></div>
+                    <div class="text-center mb-4 relative z-10">
+                        <i class="fa-solid fa-palette text-4xl text-yellow-400 mb-2 block"></i>
+                        <h3 class="text-xl font-bold text-yellow-600 border-b-2 border-yellow-100 border-dashed inline-block pb-1">Canvaで「魅せる」画像づくり</h3>
+                    </div>
+                    <p class="text-sm font-bold text-gray-600 relative z-10">
+                        インスタの投稿、名刺、チラシ……。<br>
+                        あなたの想いや希望に合わせて、<span class="bg-yellow-100 text-yellow-700 px-1 rounded">「これ素敵！」</span>と言われるデザインを創ります。<br>
+                        世界観を統一して、もっとファンを増やしましょう🎨
+                    </p>
+                </article>
 
-        </div>
+                <article class="bg-white p-6 rounded-3xl border-4 border-orange-100 card-shadow hover:-translate-y-1 transition duration-300 relative overflow-hidden group">
+                    <div class="absolute -right-4 -top-4 w-20 h-20 bg-orange-100 rounded-full opacity-50 group-hover:scale-150 transition duration-500"></div>
+                    <div class="text-center mb-4 relative z-10">
+                        <i class="fa-solid fa-tent text-4xl text-orange-400 mb-2 block"></i>
+                        <h3 class="text-xl font-bold text-orange-600 border-b-2 border-orange-100 border-dashed inline-block pb-1">お祭り・イベント作戦会議</h3>
+                    </div>
+                    <ul class="space-y-3 relative z-10">
+                        <li class="bg-orange-50 p-3 rounded-xl border border-orange-100">
+                            <strong class="block text-orange-800 text-sm">イベント・マルシェ企画</strong>
+                            <span class="text-xs text-orange-600 block mt-1">あなたの「やりたい！」を形にします。</span>
+                        </li>
+                        <li class="bg-orange-50 p-3 rounded-xl border border-orange-100">
+                            <strong class="block text-orange-800 text-sm">人が集まる「場」づくり</strong>
+                            <span class="text-xs text-orange-600 block mt-1">誰でも馴染める温かい空気を作ります。</span>
+                        </li>
+                    </ul>
+                </article>
 
-        <div id="about" class="profile-section">
-            <div class="profile-img-box">
-                <img src="plofile_img.png" alt="のりちゃんの写真">
-            </div>
-            <div class="profile-content">
-                <h3>
-                    <i class="fa-solid fa-hat-wizard" style="color:var(--primary-color);"></i> 
-                    きたがわ のりこ
-                    <span style="font-size:0.6em; display:block; margin-top:5px; color:#6D4C41; font-weight:normal;">
-                        （北川 雅子 / のりちゃん）
-                    </span>
-                </h3>
-                <p>
-                    <strong>「ヒト・モノ・コト。ありとあらゆる可能性の架け橋」</strong><br>
-                    滋賀県長浜市を拠点に活動中。<br>
-                    人と繋がり、人を知ることが好き。<br>
-                    人とすぐに仲良くなって打ち解けられる才能がある<br><br>
+                <article class="bg-white p-6 rounded-3xl border-4 border-pink-100 card-shadow hover:-translate-y-1 transition duration-300 relative overflow-hidden group">
+                    <div class="absolute -right-4 -top-4 w-20 h-20 bg-pink-100 rounded-full opacity-50 group-hover:scale-150 transition duration-500"></div>
+                    <div class="text-center mb-4 relative z-10">
+                        <i class="fa-solid fa-comments text-4xl text-pink-400 mb-2 block"></i>
+                        <h3 class="text-xl font-bold text-pink-600 border-b-2 border-pink-100 border-dashed inline-block pb-1">人生と心のおしゃべり整理</h3>
+                    </div>
+                    <ul class="space-y-3 relative z-10">
+                        <li class="bg-pink-50 p-3 rounded-xl border border-pink-100">
+                            <strong class="block text-pink-800 text-sm">5年後の未来地図ワーク</strong>
+                            <span class="text-xs text-pink-600 block mt-1">ワクワクする未来を一緒に妄想しましょう！</span>
+                        </li>
+                        <li class="bg-pink-50 p-3 rounded-xl border border-pink-100">
+                            <strong class="block text-pink-800 text-sm">オラクルカードでヒント探し 🔮</strong>
+                            <span class="text-xs text-pink-600 block mt-1">迷った時の優しい道しるべになります。</span>
+                        </li>
+                         <li class="bg-pink-50 p-3 rounded-xl border border-pink-100">
+                            <strong class="block text-pink-800 text-sm">ゆるっと話して元気になる会</strong>
+                            <span class="text-xs text-pink-600 block mt-1">気づいたら元気になってる不思議な時間☕</span>
+                        </li>
+                    </ul>
+                </article>
+
+                <article class="bg-white p-6 rounded-3xl border-4 border-purple-200 card-shadow hover:-translate-y-1 transition duration-300 relative overflow-hidden group">
+                    <div class="absolute -right-4 -top-4 w-20 h-20 bg-purple-100 rounded-full opacity-50 group-hover:scale-150 transition duration-500"></div>
+                    <div class="text-center mb-4 relative z-10">
+                        <i class="fa-solid fa-bolt text-4xl text-purple-500 mb-2 block"></i>
+                        <h3 class="text-xl font-bold text-purple-600 border-b-2 border-purple-100 border-dashed inline-block pb-1">会うだけで元気注入！</h3>
+                    </div>
                     
-                    自分の「好き」でワクワクしながら、誰かの力になれるなら、そのために技術を使いたい。<br>
-                    難しい専門用語は使いません。あなたのペースで、一緒にワクワクを作りましょう！
-                </p>
+                    <div class="bg-yellow-100 border-l-4 border-yellow-400 p-4 rounded-r-xl mb-4 relative z-10 animate-pulse-slow">
+                        <span class="absolute -top-3 -right-2 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full transform rotate-12 shadow-sm border-2 border-white">一番オススメ！</span>
+                        <div class="font-bold text-purple-700 flex items-center gap-2 mb-1">
+                             <i class="fa-regular fa-face-smile-wink"></i> とりあえず「レンタルのりちゃん」
+                        </div>
+                        <p class="text-xs text-gray-700 font-bold leading-relaxed">
+                            百聞は一見にしかず。のりちゃんの<span class="text-pink-600">ご機嫌キラキラパワー</span>と<span class="text-purple-600">神的な浄化力</span>を体験してみよう✨
+                        </p>
+                    </div>
+
+                    <ul class="space-y-3 relative z-10">
+                        <li class="bg-purple-50 p-3 rounded-xl border border-purple-100">
+                            <strong class="block text-purple-800 text-sm">気になるお店・会場を「一緒に見学」</strong>
+                            <span class="text-xs text-purple-600 block mt-1">一人じゃ行きにくい場所もご一緒に🎵</span>
+                        </li>
+                        <li class="bg-purple-50 p-3 rounded-xl border border-purple-100">
+                            <strong class="block text-purple-800 text-sm">人や場所の「勝手にリサーチ」代行</strong>
+                            <span class="text-xs text-purple-600 block mt-1">のりちゃん独自の視点で調査します！</span>
+                        </li>
+                    </ul>
+                    <div class="text-right mt-2 text-xs text-pink-500 font-bold">※交通費は別途♡</div>
+                </article>
                 
-                <div style="margin-top: 20px; padding-top: 20px; border-top: 2px dashed #FFB74D;">
-                    <p style="margin-bottom: 0; font-weight: bold; color: #E65100;">
-                        <i class="fa-regular fa-handshake"></i> 大切にしていること
+                 <article class="bg-white p-6 rounded-3xl border-4 border-gray-200 card-shadow hover:-translate-y-1 transition duration-300 relative overflow-hidden group md:col-span-2">
+                    <div class="absolute -right-4 -top-4 w-20 h-20 bg-gray-100 rounded-full opacity-50 group-hover:scale-150 transition duration-500"></div>
+                    <div class="text-center mb-4 relative z-10">
+                        <i class="fa-solid fa-life-ring text-4xl text-gray-400 mb-2 block"></i>
+                        <h3 class="text-xl font-bold text-gray-600 border-b-2 border-gray-200 border-dashed inline-block pb-1">パソコン・スマホの「困った！」解決</h3>
+                    </div>
+                    <p class="text-sm font-bold text-gray-600 text-center relative z-10">
+                        「この画面なに？」「設定がわからん！」<br>
+                        そんな時は、隣に座って一緒に解決します。<br>
+                        <span class="bg-gray-100 text-gray-700 px-1 rounded">あなた専属の「デジタル・コンシェルジュ」</span>として頼ってください☕
                     </p>
-                    <p style="font-size: 0.95rem; margin-top: 10px;">
-                        やりとりはLINE・Zoom・対面など、あなたの一番ラクな方法でOK！<br>
-                        お互いが「安心感」と「信頼感」を感じながらワクワクを共に創り上げることを大切にしています🎁
-                    </p>
-                </div>
+                </article>
 
             </div>
         </div>
 
-        <div id="message" class="message-section">
-            <h3>制作への想い</h3>
-            <div class="message-body">
+        <div id="about" class="bg-white rounded-[3rem] p-8 border-[10px] border-white outline outline-4 outline-orange-100 shadow-xl mb-16 relative transform rotate-1 md:rotate-2">
+            <div class="absolute -top-6 left-1/2 transform -translate-x-1/2 bg-pink-200/80 w-32 h-8 rotate-[-2deg] pointer-events-none"></div> <div class="flex flex-col md:flex-row items-center md:items-start gap-8">
+                <div class="shrink-0 w-40 h-40 bg-orange-50 rounded-full border-[6px] border-white shadow-lg overflow-hidden transform -rotate-3">
+                    <img src="plofile_img.png" alt="のりちゃんの写真" class="w-full h-full object-cover">
+                </div>
+                
+                <div class="flex-1">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-2 yomogi-font flex items-center justify-center md:justify-start gap-2">
+                        <i class="fa-solid fa-hat-wizard text-orange-400"></i> きたがわ のりこ
+                    </h3>
+                    <span class="block text-sm text-gray-500 font-bold mb-4 text-center md:text-left">（北川 雅子 / のりちゃん）</span>
+                    
+                    <p class="text-sm font-bold text-gray-700 mb-4 bg-orange-50 p-4 rounded-2xl border border-orange-100 leading-relaxed">
+                        <span class="text-orange-600 block mb-2 text-base">「ヒト・モノ・コト。ありとあらゆる可能性の架け橋」</span>
+                        滋賀県長浜市を拠点に活動中。<br>
+                        人と繋がり、人を知ることが好き。<br>
+                        人とすぐに仲良くなって打ち解けられる才能がある👽<br><br>
+                        自分の「好き」でワクワクしながら、誰かの力になれるなら、そのために技術を使いたい。<br>
+                        難しい専門用語は使いません。あなたのペースで、一緒にワクワクを作りましょう！
+                    </p>
+
+                    <div class="mt-6 pt-6 border-t-2 border-dashed border-orange-200">
+                        <p class="font-bold text-orange-600 mb-2 flex items-center justify-center md:justify-start gap-2">
+                            <i class="fa-regular fa-handshake"></i> 大切にしていること
+                        </p>
+                        <p class="text-sm font-bold text-gray-600 leading-relaxed">
+                            やりとりはLINE・Zoom・対面など、あなたの一番ラクな方法でOK！<br>
+                            お互いが「安心感」と「信頼感」を感じながらワクワクを共に創り上げることを大切にしています🎁
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="message" class="bg-white max-w-2xl mx-auto p-8 md:p-12 rounded-lg shadow-lg relative mb-16" style="background-image: linear-gradient(#e0d3bc 1px, transparent 1px); background-size: 100% 2.5rem; line-height: 2.5rem;">
+            <div class="text-center mb-8">
+                <h3 class="text-2xl font-bold text-gray-600 yomogi-font inline-block border-b-4 border-orange-200 px-4">制作への想い</h3>
+            </div>
+            
+            <div class="text-gray-700 font-bold text-base md:text-lg space-y-8">
                 <p>
-                    私は、どんな人の人生も、唯一無二の尊い、優劣なんてつけられない、<span class="message-highlight">宝物</span>だと思っています。
+                    私は、どんな人の人生も、唯一無二の尊い、優劣なんてつけられない、<span class="bg-yellow-100 text-orange-700 px-1 rounded">宝物</span>だと思っています。
                 </p>
                 <p>
                     AIやいろんな技術がどれだけ進んでも、絶対に人間にしか創り出すことのできないものがあります。<br>
@@ -532,34 +247,51 @@
                 </p>
                 <p>
                     「私の人生なんて…」「コンテンツにできるようなものじゃないよ」<br>
-                    そう思ってる人に限って、私から見れば<span class="message-highlight">「こんなにも魅力的なものを持っているのに、世に出さないなんてもったいない！」</span>と、いてもたってもいられなくなるような宝物を持っています。
+                    そう思ってる人に限って、私から見れば<span class="bg-yellow-100 text-orange-700 px-1 rounded">「こんなにも魅力的なものを持っているのに、世に出さないなんてもったいない！」</span>と、いてもたってもいられなくなるような宝物を持っています。
                 </p>
                 <p>
                     私が生きているうちに出会うことできる存在は限られています。<br>
                     だからこそ、奇跡的なご縁で私に依頼をくれた人とのやりとり一つ一つを、決して無駄にしたくありません。<br>
-                    ただ「これ作って」「はい創りました」で終わらせる制作代行ではなく、<span class="message-highlight">「唯一無二の私とあなた」が化学反応を起こして生まれる「創造」</span>を、ワクワクしながら待っています！！
+                    ただ「これ作って」「はい創りました」で終わらせる制作代行ではなく、<span class="bg-yellow-100 text-orange-700 px-1 rounded">「唯一無二の私とあなた」が化学反応を起こして生まれる「創造」</span>を、ワクワクしながら待っています！！
                 </p>
             </div>
         </div>
 
-        <div id="contact" class="cta-section">
-            <p class="cta-text" style="font-family: 'Yomogi', cursive; font-size: 1.4rem; color: var(--text-color);">
+        <div id="contact" class="text-center bg-orange-50 border-4 border-dashed border-orange-300 rounded-[2rem] p-8 md:p-12 max-w-2xl mx-auto relative transform -rotate-1 shadow-lg">
+            <div class="absolute -top-6 left-6 text-4xl text-gray-400 transform -rotate-12">📎</div>
+            
+            <p class="yomogi-font text-xl md:text-2xl font-bold text-gray-700 mb-8 leading-relaxed">
                 デジタルのお悩みも、<br>リアルな「やりたい！」も。<br>
                 まずは「こんなことできる？」と<br>お気軽に声をかけてくださいね 😊
             </p>
             
-            <a href="https://www.instagram.com/nononoriko.k/" class="btn" target="_blank" rel="noopener noreferrer">
-                <i class="fa-brands fa-instagram"></i> とりあえずDMで声かけてみる♡
-            </a>
-            <p class="small-note">※Instagramに飛びます</p>
+            <div class="text-center space-y-8">
+                
+                <div>
+                    <p class="font-bold text-sm mb-2 text-orange-600 whitespace-nowrap tracking-tight animate-bounce">一緒に何かしたくなった？👇</p>
+                    <a href="https://www.instagram.com/nononoriko.k" target="_blank" class="block w-full max-w-md mx-auto bg-gradient-to-r from-pink-400 to-yellow-400 text-white font-bold text-lg py-4 rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition duration-200 border-4 border-white animate-pulse">
+                        <i class="fa-brands fa-instagram mr-2"></i> DMでコンタクトをとる 💌
+                    </a>
+                    <p class="text-[10px] text-gray-400 mt-1 font-bold">※ インスタグラムへ飛びます</p>
+                </div>
+
+                <div>
+                    <p class="font-bold text-sm mb-2 text-green-600 whitespace-nowrap tracking-tight">公式LINEからでもOKだよ！👇</p>
+                    <a href="https://lin.ee/CkdRker" target="_blank" class="block w-full max-w-md mx-auto bg-gradient-to-r from-[#06C755] to-[#00B900] text-white font-bold text-lg py-4 rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition duration-200 border-4 border-white">
+                        <i class="fa-brands fa-line mr-2"></i> 公式LINEで話しかける 💬
+                    </a>
+                </div>
+
+            </div>
         </div>
+
     </div>
 
-    <footer>
-        <a href="https://chiromura.github.io/noriko/" class="footer-back-btn">
+    <footer class="text-center bg-orange-400 text-white py-10 mt-12 border-t-[6px] border-dotted border-white">
+        <a href="https://chiromura.github.io/noriko/" class="inline-block bg-white text-orange-500 font-bold px-6 py-3 rounded-full shadow-md hover:bg-orange-50 transition mb-4">
             <i class="fa-solid fa-home"></i> トップページに戻る
         </a>
-        <p>&copy; 2025 Chiromura All Rights Reserved.</p>
+        <p class="text-xs font-bold opacity-80">&copy; 2025 Chiromura All Rights Reserved.</p>
     </footer>
 
 </body>
