@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>私のできることメニュー | デジタル・コンシェルジュ のりちゃん</title>
+    <link href="https://fonts.googleapis.com/css2?family=Yomogi&family=Zen+Maru+Gothic:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            /* 配色パレット */
+            --primary-color: #FFB74D;
+            --secondary-color: #FFAB91;
+            --accent-color: #FFF59D;
+            --bg-color: #FFF8E1;
+            --text-color: #5D4037;
+            --card-bg: #FFFFFF;
+            --line-color: #e0d3bc;
+
+            /* 追加メニュー用カラー */
+            --event-color: #FFF176;
+            --heart-color: #F8BBD0;
+            --power-color: #E1BEE7;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Zen Maru Gothic', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            background-image: repeating-linear-gradient(transparent, transparent 29px, var(--line-color) 30px);
+            background-size: 100% 30px;
+            background-attachment: local;
+            color: var(--text-color);
+            line-height: 1.8;
+            overflow-x: hidden; /* 横揺れ防止 */
+        }
+
+        /* ヘッダー */
+        header {
+            background-color: #fff;
+            background-image: url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23FFB74D' fill-opacity='0.2' fill-rule='evenodd'%3E%3Cpath d='M5 0h1L0 6V5zM6 5v1H5z'/%3E%3C/g%3E%3C/svg%3E");
+            padding: 40px 20px;
+            text-align: center;
+            border-bottom: 3px dashed var(--primary-color);
+            position: relative;
+        }
+
+        h1 {
+            font-family: 'Yomogi', cursive;
+            font-size: 2.2rem;
+            margin: 0;
+            color: var(--text-color);
+            display: inline-block;
+            background: #fff;
+            padding: 10px 30px;
+            border-radius: 50px;
+            border: 3px dotted var(--primary-color);
+            transform: rotate(-2deg);
+        }
+
+        .back-to-top {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-family: 'Yomogi', cursive;
+            text-decoration: none;
+            color: var(--secondary-color);
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .back-to-top:hover { color: var(--primary-color); }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto 60px;
+            padding: 0 20px;
+        }
+
+        /* ナビゲーション */
+        .main-nav {
+            text-align: center;
+            margin: 30px 0 50px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .main-nav a {
+            display: inline-block;
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            font-family: 'Yomogi', cursive;
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 10px 10px 5px 5px;
+            border-bottom: 4px solid var(--primary-color);
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+            transition: all 0.2s;
+            font-size: 1.1rem;
+            white-space: nowrap; /* 文字の折り返し禁止 */
+        }
+
+        .main-nav a:nth-child(1) { border-bottom-color: var(--event-color); }
+        .main-nav a:nth-child(2) { border-bottom-color: var(--heart-color); }
+        .main-nav a:nth-child(3) { border-bottom-color: var(--power-color); }
+        .main-nav a:hover { top: -5px; background-color: #FFFDE7; }
+
+        .section-title {
+            text-align: center;
+            font-family: 'Yomogi', cursive;
+            font-size: 2rem;
+            color: var(--text-color);
+            margin-bottom: 40px;
+            margin-top: 60px;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%) rotate(-3deg);
+            background: #fff;
+            padding: 5px 20px;
+            border: 2px dashed var(--secondary-color);
+            box-shadow: 3px 3px 0 rgba(255, 171, 145, 0.3);
+            width: max-content;
+            max-width: 90%;
+        }
+        
+        /* カードスタイル */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            padding: 20px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            background-image: linear-gradient(to right, rgba(255,255,255,0.9), rgba(255,248,225,0.9));
+            border-radius: 10px;
+            padding: 35px 25px;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.08);
+            position: relative;
+            border: none;
+            transition: transform 0.3s ease;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%) rotate(-2deg);
+            width: 120px;
+            height: 35px;
+            background-color: rgba(255, 183, 77, 0.6);
+            mask-image: url("data:image/svg+xml,%3Csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='0' y='0' width='100%25' height='100%25' fill='white'/%3E%3C/svg%3E");
+            border-left: 2px dashed rgba(255,255,255,0.3);
+            border-right: 2px dashed rgba(255,255,255,0.3);
+            opacity: 0.8;
+            z-index: 1;
+        }
+        
+        .card:nth-child(odd) { transform: rotate(1.5deg); }
+        .card:nth-child(even) { transform: rotate(-1.5deg); }
+        .card:hover { transform: scale(1.02) rotate(0deg) !important; box-shadow: 8px 8px 20px rgba(0,0,0,0.12); z-index: 10; }
+
+        .card-icon { font-size: 3rem; color: var(--primary-color); margin-bottom: 15px; text-align: center; display: block; }
+        .card h3 { font-family: 'Yomogi', cursive; font-size: 1.5rem; margin-bottom: 15px; color: var(--text-color); text-align: center; background-image: linear-gradient(transparent 70%, var(--accent-color) 70%); display: inline-block; width: 100%; }
+        .card p { font-size: 0.95rem; color: #6D4C41; }
+        
+        .service-list { list-style: none; padding-left: 10px; margin-top: 20px; }
+        .service-list li { margin-bottom: 15px; position: relative; padding-left: 25px; font-size: 0.95rem; }
+        .service-list li::before { content: "✔"; font-family: 'Yomogi', cursive; color: var(--primary-color); position: absolute; left: 0; font-weight: bold; font-size: 1.2rem; }
+        .service-list li strong { display: block; color: #5D4037; font-size: 1.05rem; border-bottom: 2px dotted var(--line-color); }
+        .small-desc { font-size: 0.85rem; color: #8D6E63; display: block; margin-top: 5px; }
+        .highlight { background: linear-gradient(to top, var(--accent-color) 60%, transparent 60%); font-weight: bold; }
+
+        .rental-box {
+            background-color: #FFF9C4;
+            border: none;
+            border-left: 6px solid #FBC02D;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            box-shadow: 3px 3px 8px rgba(0,0,0,0.1);
+            transform: rotate(-2deg);
+        }
+        .recommend-badge { position: absolute; top: -15px; right: -10px; background-color: #FF5252; color: #fff; font-family: 'Yomogi', cursive; padding: 5px 15px; border-radius: 30px; font-size: 0.9rem; font-weight: bold; box-shadow: 0 2px 5px rgba(0,0,0,0.2); transform: rotate(10deg); z-index: 10; border: 2px solid #fff; }
+        .rental-title { font-family: 'Yomogi', cursive; font-weight: bold; font-size: 1.3rem; color: #E65100; display: flex; align-items: center; gap: 10px; }
+        .note { text-align: right; font-size: 0.8rem; color: #E91E63; margin-top: 10px; font-family: 'Yomogi', cursive; }
+
+        /* プロフィールセクション */
+        .profile-section {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 40px;
+            margin: 80px auto 40px;
+            max-width: 800px;
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+            position: relative;
+            border: 15px solid #fff;
+            outline: 2px solid #eee;
+            transform: rotate(2deg);
+        }
+        .profile-section::before {
+            content: "";
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 40px;
+            background-color: rgba(248, 187, 208, 0.7);
+            mask-image: url("data:image/svg+xml,%3Csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='0' y='0' width='100%25' height='100%25' fill='white'/%3E%3C/svg%3E");
+        }
+        .profile-img-box {
+            flex-shrink: 0;
+            width: 180px;
+            height: 180px;
+            background-color: #f0f0f0;
+            border: 5px solid #fff;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+        }
+        .profile-img-box img { width: 100%; height: 100%; object-fit: cover; }
+        .profile-content h3 { font-family: 'Yomogi', cursive; font-size: 1.8rem; color: var(--text-color); margin-top: 0; border-bottom: 3px dotted var(--primary-color); display: inline-block;}
+        .profile-content p { font-size: 1rem; color: #5D4037; margin-bottom: 15px; }
+
+        /* メッセージセクション */
+        .message-section {
+            background-color: #fff;
+            max-width: 800px;
+            margin: 0 auto 60px;
+            padding: 50px 40px;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: relative;
+            background-image: linear-gradient(#e0d3bc 1px, transparent 1px);
+            background-size: 100% 2em;
+            line-height: 2em;
+        }
+        .message-section h3 { font-family: 'Yomogi', cursive; text-align: center; font-size: 1.8rem; margin-bottom: 30px; color: var(--secondary-color); }
+        .message-body { font-size: 1.05rem; color: #4e342e; }
+        .message-body p { margin-bottom: 2em; }
+        .message-highlight { font-weight: bold; color: #D84315; background: rgba(255,224,178,0.3); }
+
+        /* CTAセクション */
+        .cta-section {
+            text-align: center;
+            margin: 60px auto;
+            padding: 50px 40px;
+            max-width: 700px;
+            background-color: #FFF8E1;
+            border: 3px dashed #FFB74D;
+            border-radius: 20px;
+            position: relative;
+            transform: rotate(-1deg);
+            box-shadow: 5px 5px 0 rgba(255, 183, 77, 0.2);
+        }
+        .cta-section::before { content: "📎"; font-size: 3rem; position: absolute; top: -25px; left: 20px; transform: rotate(-15deg); color: #5D4037; }
+        .btn {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px 45px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-family: 'Yomogi', cursive;
+            font-size: 1.3rem;
+            font-weight: bold;
+            box-shadow: 0 5px 0px #E65100;
+            transition: all 0.2s;
+            display: inline-block;
+            margin-top: 25px;
+        }
+        .btn:hover { transform: translateY(3px); box-shadow: 0 2px 0px #E65100; background-color: #FFB300; }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            background-color: var(--primary-color);
+            color: white;
+            font-family: 'Yomogi', cursive;
+            margin-top: 60px;
+            border-top: 5px dotted #fff;
+        }
+        .footer-back-btn { display: inline-block; background: #fff; color: var(--primary-color); padding: 10px 30px; border-radius: 30px; text-decoration: none; font-weight: bold; margin-bottom: 20px; box-shadow: 0 3px 0 rgba(0,0,0,0.1); }
+        .footer-back-btn:hover { transform: translateY(2px); box-shadow: 0 1px 0 rgba(0,0,0,0.1); background-color: #FFFDE7; }
+
+        /* =========================================
+           スマホ最適化 (レスポンシブ対応)
+           ========================================= */
+        @media (max-width: 600px) {
+            /* 全体の余白調整 */
+            .container { padding: 0 15px; }
+
+            /* ヘッダー周り */
+            h1 { font-size: 1.6rem; padding: 10px 20px; line-height: 1.4; }
+            .back-to-top span { display: none; } /* 「トップに戻る」の文字を消してアイコンのみに */
+            .back-to-top { font-size: 1.2rem; background: #fff; width: 40px; height: 40px; justify-content: center; border-radius: 50%; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+
+            /* ナビゲーション（横スクロール化） */
+            .main-nav {
+                justify-content: flex-start; /* 左寄せ */
+                flex-wrap: nowrap; /* 折り返さない */
+                overflow-x: auto; /* 横スクロール許可 */
+                padding-bottom: 10px; /* スクロールバーの干渉を防ぐ */
+                -webkit-overflow-scrolling: touch; /* 滑らかスクロール */
+                margin: 20px -15px 40px; /* 画面端まで広げる */
+                padding-left: 15px; /* 左端の余白 */
+            }
+            .main-nav a { flex-shrink: 0; font-size: 0.95rem; padding: 10px 15px; }
+
+            /* カードとグリッド */
+            .services-grid { grid-template-columns: 1fr; padding: 0; gap: 30px; }
+            .card { padding: 30px 20px; margin-bottom: 10px; }
+            /* スマホでは傾きをリセット（まっすぐに）して読みやすく */
+            .card:nth-child(odd), .card:nth-child(even), .cta-section, .section-title { transform: rotate(0deg); }
+            /* マステの位置調整 */
+            .card::before { width: 100px; height: 30px; top: -12px; }
+
+            /* プロフィールセクション */
+            .profile-section {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+                border-width: 8px; /* 枠を少し細く */
+                padding: 30px 20px;
+                transform: rotate(0deg); /* 傾き解除 */
+            }
+            .profile-img-box { margin: 0 auto; width: 160px; height: 160px; }
+
+            /* メッセージセクション */
+            .message-section { padding: 30px 20px; background-size: 100% 2.2em; line-height: 2.2em; }
+            
+            /* CTAセクション */
+            .cta-section { padding: 40px 20px; }
+            .cta-text { font-size: 1.2rem !important; }
+            .btn { width: 100%; box-sizing: border-box; padding: 15px 20px; font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="https://chiromura.github.io/noriko/" class="back-to-top">
+            <i class="fa-solid fa-chevron-left"></i> <span>トップに戻る</span>
+        </a>
+        <h1>私のできることメニュー</h1>
+    </header>
+
+    <div class="container">
+
+        <nav class="main-nav">
+            <a href="#menu">メニュー一覧</a>
+            <a href="#about">魔法使いの紹介</a>
+            <a href="#message">制作への想い</a>
+            <a href="#contact">相談ポスト</a>
+        </nav>
+
+        <h2 id="menu" class="section-title">Menu / できること一覧</h2>
+
+        <div class="services-grid">
+            
+            <article class="card">
+                <i class="fa-regular fa-gem card-icon"></i>
+                <h3>自分だけのホームページ<br><span style="font-size:0.8em">（人生の宝箱づくり）</span></h3>
+                <p>
+                    「私なんて普通の人生だし…」なんて言わせません！<br>
+                    あなたの人生は、磨けばもっと輝く<span class="highlight"> ダイヤの原石 </span>。<br>
+                    埋もれていた経験や想いを、私と一緒に<span class="highlight"> 「ずっと残るWebサイト」 </span>という形にしませんか？
+                </p>
+            </article>
+
+            <article class="card alchemy">
+                <i class="fa-solid fa-flask-vial card-icon"></i>
+                <h3>情報の錬金術<br><span style="font-size:0.8em">（コンテンツ化の魔法）</span></h3>
+                <p>
+                    <strong>お喋りするだけでOK！</strong><br>
+                    デジタルが苦手でも大丈夫。あなたが当たり前だと思っている経験も、磨けば輝く<span class="highlight"> ダイヤの原石 </span>です。<br>
+                    素材を渡すだけで、あなたの人生や想いを<span class="highlight"> キラキラのWebコンテンツ </span>に変身させ、生きた証として残します✨
+                </p>
+            </article>
+
+            <article class="card">
+                <i class="fa-solid fa-palette card-icon"></i>
+                <h3>Canvaで<br>「魅せる」画像づくり</h3>
+                <p>
+                    インスタの投稿、名刺、チラシ……。<br>
+                    あなたの想いや希望に合わせて、<span class="highlight"> 「これ素敵！」 </span>と言われるデザインを創ります。<br>
+                    世界観を統一して、もっとファンを増やしましょう🎨
+                </p>
+            </article>
+
+            <article class="card">
+                <i class="fa-solid fa-tent card-icon" style="color: #FBC02D;"></i>
+                <h3>お祭り・イベント<br>作戦会議</h3>
+                <ul class="service-list">
+                    <li>
+                        <strong>イベント・マルシェ企画</strong>
+                        <span class="small-desc">あなたの「やりたい！」を形にします。</span>
+                    </li>
+                    <li>
+                        <strong>人が集まる「場」づくり</strong>
+                        <span class="small-desc">誰でも馴染める温かい空気を作ります。</span>
+                    </li>
+                </ul>
+            </article>
+
+            <article class="card">
+                <i class="fa-solid fa-comments card-icon" style="color: #F48FB1;"></i>
+                <h3>人生と心の<br>おしゃべり整理</h3>
+                <ul class="service-list">
+                    <li>
+                        <strong>5年後の未来地図ワーク</strong>
+                        <span class="small-desc">ワクワクする未来を一緒に妄想しましょう！</span>
+                    </li>
+                    <li>
+                        <strong>オラクルカードでヒント探し 🔮</strong>
+                        <span class="small-desc">迷った時の優しい道しるべになります。</span>
+                    </li>
+                    <li>
+                        <strong>ゆるっと話して元気になる会</strong>
+                        <span class="small-desc">気づいたら元気になってる不思議な時間☕</span>
+                    </li>
+                </ul>
+            </article>
+
+            <article class="card">
+                <i class="fa-solid fa-bolt card-icon" style="color: #AB47BC;"></i>
+                <h3>会うだけで<br>元気注入！</h3>
+                
+                <div class="rental-box">
+                    <span class="recommend-badge">一番オススメ！</span>
+                    <div class="rental-title">
+                        <i class="fa-regular fa-face-smile-wink"></i> とりあえず<br>「レンタルのりちゃん」
+                    </div>
+                    <p style="font-size:0.9rem; margin-top:10px; margin-bottom:0; color:#5D4037;">
+                        百聞は一見にしかず。とにかく会ったら分かる、のりちゃんの<span style="color:#E91E63; font-weight:bold; border-bottom:2px solid #E91E63;">ご機嫌キラキラパワー</span>と<span style="color:#9C27B0; font-weight:bold; border-bottom:2px solid #9C27B0;">神的な浄化力</span>を体験してみよう✨
+                    </p>
+                </div>
+
+                <ul class="service-list">
+                    <li>
+                        <strong>気になるお店・会場を「一緒に見学」</strong>
+                        <span class="small-desc">一人じゃ行きにくい場所もご一緒に🎵</span>
+                    </li>
+                    <li>
+                        <strong>人や場所の「勝手にリサーチ」代行</strong>
+                        <span class="small-desc">のりちゃん独自の視点で調査します！</span>
+                    </li>
+                </ul>
+                <div class="note">※交通費は別途♡</div>
+            </article>
+
+            <article class="card">
+                <i class="fa-solid fa-life-ring card-icon"></i>
+                <h3>パソコン・スマホの<br>「困った！」解決</h3>
+                <p>
+                    「この画面なに？」「設定がわからん！」<br>
+                    そんな時は、隣に座って一緒に解決します。<br>
+                    <span class="highlight"> あなた専属の「デジタル・コンシェルジュ」 </span>として頼ってください☕
+                </p>
+            </article>
+
+        </div>
+
+        <div id="about" class="profile-section">
+            <div class="profile-img-box">
+                <img src="plofile_img.png" alt="のりちゃんの写真">
+            </div>
+            <div class="profile-content">
+                <h3><i class="fa-solid fa-hat-wizard" style="color:var(--primary-color);"></i> 魔法使い：のりちゃん</h3>
+                <p>
+                    <strong>「ヒト・モノ・コト。ありとあらゆる可能性の架け橋」</strong><br>
+                    滋賀県長浜市を拠点に活動中。<br>
+                    実は、小学生の頃からパソコンが大好き！<br>
+                    デジタル・アナログ問わず、お絵描きや文字を書くのが趣味です。
+                </p>
+                <p>
+                    自分の「好き」でワクワクしながら、誰かの力になれるなら、そのために技術を使いたい。<br>
+                    難しい専門用語は使いません。あなたのペースで、一緒にワクワクを作りましょう！
+                </p>
+            </div>
+        </div>
+
+        <div id="message" class="message-section">
+            <h3>制作への想い</h3>
+            <div class="message-body">
+                <p>
+                    私は、どんな人の人生も、唯一無二の尊い、優劣なんてつけられない、<span class="message-highlight">宝物</span>だと思っています。
+                </p>
+                <p>
+                    AIやいろんな技術がどれだけ進んでも、絶対に人間にしか創り出すことのできないものがあります。<br>
+                    それは一人一人のリアルな感情体験や、人と人との繋がりの中でうまれる経験、気持ちの揺らぎ、失敗、不完全さ、不合理で矛盾した気持ちや行動。
+                </p>
+                <p>
+                    人が歩む「今」の積み重ねは、その人にしか重ねていけない経験。<br>
+                    だからこそ、私はその尊い経験を、私にも教えて欲しい、そして、大切にしたいのです。
+                </p>
+                <p>
+                    「私の人生なんて…」「コンテンツにできるようなものじゃないよ」<br>
+                    そう思ってる人に限って、私から見れば<span class="message-highlight">「こんなにも魅力的なものを持っているのに、世に出さないなんてもったいない！」</span>と、いてもたってもいられなくなるような宝物を持っています。
+                </p>
+                <p>
+                    私が生きているうちに出会うことできる存在は限られています。<br>
+                    だからこそ、奇跡的なご縁で私に依頼をくれた人とのやりとり一つ一つを、決して無駄にしたくありません。<br>
+                    ただ「これ作って」「はい創りました」で終わらせる制作代行ではなく、<span class="message-highlight">「唯一無二の私とあなた」が化学反応を起こして生まれる「創造」</span>を、ワクワクしながら待っています！！
+                </p>
+            </div>
+        </div>
+
+        <div id="contact" class="cta-section">
+            <p class="cta-text" style="font-family: 'Yomogi', cursive; font-size: 1.4rem; color: var(--text-color);">
+                デジタルのお悩みも、<br>リアルな「やりたい！」も。<br>
+                まずは「こんなことできる？」と<br>お気軽に声をかけてくださいね 😊
+            </p>
+            <a href="#" class="btn">
+                <i class="fa-regular fa-envelope"></i> 魔法使いに相談してみる
+            </a>
+        </div>
+    </div>
+
+    <footer>
+        <a href="https://chiromura.github.io/noriko/" class="footer-back-btn">
+            <i class="fa-solid fa-home"></i> トップページ（名刺）に戻る
+        </a>
+        <p>&copy; 2024 Digital Concierge Nori-chan. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
