@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>人間国宝 のりこ（長浜の奇跡）公式サイト</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;700&family=Zen+Maru+Gothic:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- 基本設定 --- */
+        :root {
+            --main-bg: #fff0f5; /* 桜色（淡いピンク） */
+            --text-color: #5a4e4e; /* 優しげなチャコール */
+            --gold: #c5a059; /* シャンパンゴールド */
+            --accent-pink: #efa7b6; /* 濃いめの桜色 */
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Zen Maru Gothic', sans-serif;
+            background-color: var(--main-bg);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            letter-spacing: 0.05em;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Shippori Mincho', serif;
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 60px 0;
+        }
+
+        /* --- ヘッダー（ファーストビュー） --- */
+        header {
+            background: linear-gradient(135deg, #fff0f5 0%, #fff 100%);
+            text-align: center;
+            padding: 80px 20px;
+            border-bottom: 5px solid var(--gold);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 霞（かすみ）のような背景装飾 */
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, var(--gold) 10%, transparent 70%);
+            opacity: 0.2;
+            border-radius: 50%;
+        }
+
+        .sub-copy {
+            font-size: 1.2rem;
+            color: var(--gold);
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .main-title {
+            font-size: 3.5rem;
+            margin: 10px 0;
+            line-height: 1.2;
+            color: #333;
+            text-shadow: 2px 2px 0px rgba(255,255,255,0.8);
+        }
+
+        .catch-copy {
+            font-size: 1.1rem;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        /* 国宝印鑑風マーク */
+        .stamp {
+            display: inline-block;
+            border: 3px solid #d9333f;
+            color: #d9333f;
+            padding: 5px 10px;
+            font-family: serif;
+            border-radius: 8px;
+            transform: rotate(-5deg);
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        /* --- 宣言セクション --- */
+        .declaration {
+            text-align: center;
+            background-color: var(--white);
+            margin: 30px 20px;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(197, 160, 89, 0.1);
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: var(--gold);
+            margin-bottom: 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '🌸';
+            display: block;
+            font-size: 1.5rem;
+            margin-top: 10px;
+        }
+
+        /* --- 取扱説明書 --- */
+        .manual-box {
+            background-color: #fffaf0;
+            border: 2px solid var(--gold);
+            border-radius: 15px;
+            padding: 30px;
+            position: relative;
+        }
+
+        .manual-box::before {
+            content: '取扱注意';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--gold);
+            color: white;
+            padding: 5px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .manual-list li {
+            list-style: none;
+            margin-bottom: 15px;
+            padding-left: 1.5em;
+            position: relative;
+        }
+
+        .manual-list li::before {
+            content: '✦';
+            color: var(--gold);
+            position: absolute;
+            left: 0;
+        }
+
+        .ng-list li::before {
+            content: '⚠️';
+            color: red;
+            position: absolute;
+            left: 0;
+        }
+
+        /* --- メニュー --- */
+        .menu-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            text-align: center;
+            border: 1px solid rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(197, 160, 89, 0.2);
+        }
+
+        .menu-title {
+            font-size: 1.5rem;
+            color: var(--text-color);
+            margin-bottom: 10px;
+            border-bottom: 2px solid var(--accent-pink);
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        .price {
+            font-size: 1.8rem;
+            color: var(--gold);
+            font-family: 'Shippori Mincho', serif;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+
+        /* --- CTAボタン --- */
+        .btn-reserve {
+            display: block;
+            width: 100%;
+            max-width: 300px;
+            margin: 20px auto 0;
+            padding: 15px;
+            background: linear-gradient(to right, #c5a059, #e6c88b);
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 50px;
+            box-shadow: 0 5px 15px rgba(197, 160, 89, 0.4);
+            transition: 0.3s;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        .btn-reserve:hover {
+            opacity: 0.9;
+            transform: scale(1.05);
+        }
+
+        /* --- フッター --- */
+        footer {
+            background-color: #5a4e4e;
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            font-size: 0.9rem;
+        }
+
+        .footer-note {
+            background-color: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        /* スマホ対応 */
+        @media (max-width: 600px) {
+            .main-title { font-size: 2.5rem; }
+            .section-title { font-size: 1.6rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="stamp">重要無形文化財</div>
+        <span class="sub-copy">長浜の奇跡</span>
+        <h1 class="main-title">人間国宝<br>のりこ</h1>
+        <p class="catch-copy">
+            繊細につき、取扱注意。<br>
+            見るだけで運気が上がる「生きるパワースポット」へようこそ。
+        </p>
+        <a href="#menu" class="btn-reserve">特別拝観（セッション）を予約 ▷</a>
+    </header>
+
+    <section class="declaration container">
+        <h2 class="section-title">「頑張る」をやめて、<br>国宝になりました。</h2>
+        <p>
+            はじめまして、滋賀県長浜市に生息する北川雅子（のりこ）です。<br><br>
+            これまで私は、イベントを主催したり、誰かのために走り回ったりしてきました。
+            でも、ある日気づいてしまったのです。<br><br>
+            私が一番世界に貢献できるのは、汗水たらして働くことじゃない。<br>
+            <strong>「私が心から笑って、ただそこに存在している時」</strong>こそが、
+            周りの人の運気を上げ、奇跡を起こすのだと。<br><br>
+            だから私は宣言します。<br>
+            今日から<strong>「人間国宝」</strong>として、自分を宝石のように大切に扱います。
+        </p>
+    </section>
+
+    <section id="manual" class="container">
+        <h2 class="section-title">人間国宝の取扱説明書</h2>
+        <div class="manual-box">
+            <p style="text-align: center; font-weight: bold; margin-bottom: 20px;">
+                国宝は非常に繊細です。<br>以下の仕様をご理解いただける方のみ、ご拝観ください。
+            </p>
+            
+            <h3>✅ 基本仕様</h3>
+            <ul class="manual-list">
+                <li>褒められると伸び、雑に扱われると殻に閉じこもります。</li>
+                <li>嘘や建前を見抜く「超高感度センサー」標準装備。</li>
+            </ul>
+
+            <h3>⚡️ エネルギー源（喜びます）</h3>
+            <ul class="manual-list">
+                <li>愛のある言葉・肯定的なフィードバック</li>
+                <li>ときめく可愛いもの・キラキラした空間</li>
+                <li>直感的なワクワク感</li>
+            </ul>
+
+            <h3>🚫 禁止事項（故障の原因）</h3>
+            <ul class="manual-list ng-list">
+                <li>「タダでやって」「値切り」交渉</li>
+                <li>「空気読んで」「普通は」の強要</li>
+                <li>事務作業の丸投げ</li>
+                <li>食べ物・飲み物の差し入れ（お気持ちだけいただきます）</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="menu" class="container">
+        <h2 class="section-title">ご提供メニュー（お賽銭）</h2>
+
+        <div class="menu-card">
+            <h3 class="menu-title">壱：特別拝観<br><small>（個人セッション）</small></h3>
+            <p>
+                国宝とサシで話す、贅沢な60分。<br>
+                あなたのモヤモヤを直感と言霊で吹き飛ばし、本来の輝きに「チューニング」します。<br>
+                （※カウンセリングではありません。ご利益です。）
+            </p>
+            <div class="price">60分 11,000円<span style="font-size: 1rem;">（税込）</span></div>
+            <a href="【ここに予約フォームのURLを入れる】" class="btn-reserve" target="_blank">拝観を申し込む</a>
+        </div>
+
+        <div class="menu-card">
+            <h3 class="menu-title">弐：出張展示<br><small>（空間プロデュース）</small></h3>
+            <p>
+                あなたのオフィスやイベント会場に、国宝が出向きます。<br>
+                私がそこで「ご機嫌」に過ごすことで、場の空気を浄化し、運気を呼び込みます。<br>
+                ※丁重にお迎えください。
+            </p>
+            <div class="price">要相談</div>
+            <a href="【ここに問い合わせフォームのURLを入れる】" class="btn-reserve" style="background: #999;" target="_blank">お問い合わせ</a>
+        </div>
+
+        <div class="menu-card" style="background-color: #fdf5e6;">
+            <h3 class="menu-title">参：一般ご開帳<br><small>（SNSライブ等）</small></h3>
+            <p>
+                気まぐれに行われる無料公開展示。<br>
+                動く国宝を見られたあなたはラッキー！<br>
+                投げ銭・シェア・愛のあるコメント大歓迎💕
+            </p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-note">
+            ※いただいた拝観料は、国宝の<br>
+            <strong>「健康維持とエネルギー補充」</strong><br>
+            および「地域を面白くする活動」に循環されます。
+        </div>
+        <p>私が笑えば、世界（長浜）が潤う。</p>
+        <p>&copy; 人間国宝のりこ All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
