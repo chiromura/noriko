@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>長浜の病院問題：わかりやすい解説ガイド v2</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&display=swap');
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: #f5f5f4; /* stone-100 */
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .candidate-card {
+            transition: all 0.3s ease;
+        }
+        .candidate-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .active-tab {
+            background-color: #4b5563; /* gray-600 */
+            color: white;
+            border-color: #4b5563;
+        }
+        .inactive-tab {
+            background-color: white;
+            color: #4b5563;
+            border-color: #e5e7eb;
+        }
+        .inactive-tab:hover {
+            background-color: #f3f4f6;
+        }
+        .fact-box {
+            border-left: 4px solid #10b981; /* green-500 */
+            background-color: #ecfdf5; /* green-50 */
+        }
+        .speculation-box {
+            border-left: 4px solid #f59e0b; /* amber-500 */
+            background-color: #fffbeb; /* amber-50 */
+        }
+    </style>
+    <!-- Chosen Palette: Warm Neutrals with Green (Fact) and Amber (Speculation/Analysis) accents. -->
+    <!-- Application Structure Plan:
+        1. Hero Section: Simple title.
+        2. Fact Check Section: NEW. Clearly separates "What is confirmed" vs "What is opinion/analysis".
+        3. Debate Section: Simplified interactive comparison.
+        4. Financial Section: Graphs with simple labels.
+        5. Context Section: Simple icons explaining the 3 reasons.
+        6. Source Section: NEW. Lists sources clearly.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+</head>
+<body class="text-stone-800">
+
+    <!-- Header / Hero -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <h1 class="text-lg md:text-xl font-bold text-stone-700 flex items-center">
+                🏥 長浜の病院、どうなるの？
+            </h1>
+            <nav class="hidden md:flex space-x-6 text-sm font-medium text-stone-500">
+                <a href="#fact-check" class="hover:text-stone-800 transition">事実と予想</a>
+                <a href="#debate" class="hover:text-stone-800 transition">二人の意見</a>
+                <a href="#finance" class="hover:text-stone-800 transition">お金の話</a>
+                <a href="#sources" class="hover:text-stone-800 transition">情報源</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-8 space-y-12">
+
+        <!-- Crisis Overview -->
+        <section class="text-center space-y-4 animate-fade-in-up">
+            <div class="inline-block px-3 py-1 bg-rose-100 text-rose-800 rounded-full text-sm font-bold mb-2">2025年のピンチ</div>
+            <h2 class="text-3xl md:text-4xl font-bold text-stone-800">「24億円」足りなくなるかも？</h2>
+            <p class="max-w-2xl mx-auto text-lg text-stone-600 leading-relaxed">
+                長浜市の病院でお金が足りない問題が起きています。<br>
+                何が「本当のこと」で、何が「心配されていること」なのか、整理してみましょう。
+            </p>
+        </section>
+
+        <!-- SECTION: Fact Check (NEW) -->
+        <section id="fact-check" class="scroll-mt-24">
+            <h3 class="text-2xl font-bold text-stone-800 mb-6 text-center">✅ 事実と、🤔 考え・予想を分ける</h3>
+            <div class="grid md:grid-cols-2 gap-6">
+                
+                <!-- FACTS Column -->
+                <div class="fact-box p-6 rounded-r-xl">
+                    <h4 class="text-xl font-bold text-emerald-800 mb-4 flex items-center">
+                        <span class="bg-emerald-200 text-emerald-800 rounded-full w-8 h-8 flex items-center justify-center mr-2 text-sm">確</span>
+                        本当のこと（事実）
+                    </h4>
+                    <ul class="space-y-3 text-emerald-900 text-sm md:text-base">
+                        <li class="flex items-start">
+                            <span class="mr-2">🔹</span>
+                            <span><strong>赤字の金額：</strong> 市立病院の2025年度の赤字は、約24億円になると予想されています。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="mr-2">🔹</span>
+                            <span><strong>建物の状態：</strong> 湖北病院は雨漏りやエアコン故障が起きていて、直すのに30年間で約27億円不足しています。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="mr-2">🔹</span>
+                            <span><strong>他の出費：</strong> 博物館（約13億円）や、企業からの請求（約14億円）などの問題も起きています。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="mr-2">🔹</span>
+                            <span><strong>アンケート：</strong> 市民団体が質問状を出し、松本氏と浅見氏の両方から回答がありました。</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- SPECULATION Column -->
+                <div class="speculation-box p-6 rounded-r-xl">
+                    <h4 class="text-xl font-bold text-amber-800 mb-4 flex items-center">
+                        <span class="bg-amber-200 text-amber-800 rounded-full w-8 h-8 flex items-center justify-center mr-2 text-sm">考</span>
+                        考え・予想（分析）
+                    </h4>
+                    <ul class="space-y-3 text-amber-900 text-sm md:text-base">
+                        <li class="flex items-start">
+                            <span class="mr-2">🔸</span>
+                            <span><strong>記者の分析：</strong> 浅見市長は以前は「日赤にお願いする」と言っていましたが、その言葉を使わなくなっています（方針が変わった可能性があります）。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="mr-2">🔸</span>
+                            <span><strong>お金の心配：</strong> このままだと「資金ショート（お金が完全になくなる）」する可能性があると心配されています。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="mr-2">🔸</span>
+                            <span><strong>見通し：</strong> 裁判や博物館の赤字があるため、これからのお金の計画は「不透明（よくわからない）」と言われています。</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 1: The Debate (Interactive Comparator) -->
+        <section id="debate" class="scroll-mt-24 border-t border-stone-200 pt-8">
+            <div class="mb-6">
+                <h3 class="text-2xl font-bold text-stone-800 mb-2">⚡️ 二人の考え方の違い</h3>
+                <p class="text-stone-600">ボタンを押して、それぞれのテーマについての意見を比べてみてください。</p>
+            </div>
+
+            <!-- Interaction Controls -->
+            <div class="flex flex-wrap gap-2 justify-center mb-8" id="topic-controls">
+                <button onclick="updateDebate('management')" class="topic-btn active-tab px-4 py-2 rounded-lg border font-medium transition" data-topic="management">
+                    🏢 病院の運営
+                </button>
+                <button onclick="updateDebate('reconstruction')" class="topic-btn inactive-tab px-4 py-2 rounded-lg border font-medium transition" data-topic="reconstruction">
+                    🏗️ 建て替え
+                </button>
+                <button onclick="updateDebate('finance')" class="topic-btn inactive-tab px-4 py-2 rounded-lg border font-medium transition" data-topic="finance">
+                    💰 市からのお金
+                </button>
+                <button onclick="updateDebate('transparency')" class="topic-btn inactive-tab px-4 py-2 rounded-lg border font-medium transition" data-topic="transparency">
+                    🗣️ 話し合い
+                </button>
+            </div>
+
+            <!-- Comparison Cards -->
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Matsumoto Card -->
+                <div class="candidate-card bg-white p-6 rounded-xl border-t-4 border-teal-500 shadow-sm flex flex-col h-full">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-teal-100 flex items-center justify-center text-2xl mr-4">松</div>
+                        <div>
+                            <h4 class="text-xl font-bold text-gray-800">松本 長治 さん</h4>
+                            <p class="text-sm text-teal-600 font-bold">みんなで話し合う</p>
+                        </div>
+                    </div>
+                    <div id="matsumoto-content" class="text-gray-700 leading-relaxed flex-grow">
+                        <!-- Content injected by JS -->
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-gray-100 text-xs text-gray-400">
+                        新人 (元 市議会議員)
+                    </div>
+                </div>
+
+                <!-- Asami Card -->
+                <div class="candidate-card bg-white p-6 rounded-xl border-t-4 border-indigo-500 shadow-sm flex flex-col h-full">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-indigo-100 flex items-center justify-center text-2xl mr-4">浅</div>
+                        <div>
+                            <h4 class="text-xl font-bold text-gray-800">浅見 宣義 市長</h4>
+                            <p class="text-sm text-indigo-600 font-bold">現実を見て慎重に</p>
+                        </div>
+                    </div>
+                    <div id="asami-content" class="text-gray-700 leading-relaxed flex-grow">
+                        <!-- Content injected by JS -->
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-gray-100 text-xs text-gray-400">
+                        現職 (今の市長)
+                    </div>
+                </div>
+            </div>
+            
+            <div id="analysis-box" class="mt-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg text-sm text-yellow-800">
+                <span class="font-bold">💡 記者のメモ：</span> <span id="analysis-text">松本さんは「役割分担」など新しい形を検討中。浅見市長は、以前言っていた「日赤にお任せする（指定管理）」という言葉を使わなくなっています。</span>
+            </div>
+        </section>
+
+        <!-- SECTION 2: Financial Reality (Charts) -->
+        <section id="finance" class="scroll-mt-24 pt-8 border-t border-stone-200">
+            <h3 class="text-2xl font-bold text-stone-800 mb-2">📉 お金の「板挟み」状態</h3>
+            <p class="text-stone-600 mb-8">
+                なぜ市長は「慎重」なのでしょうか？ それは、病院以外にもお金がかかる問題があるからです。<br>
+                数字で見てみましょう。
+            </p>
+
+            <div class="grid lg:grid-cols-2 gap-8">
+                <!-- Chart 1: The Deficit & Competitors -->
+                <div class="bg-white p-6 rounded-xl shadow-sm">
+                    <h4 class="font-bold text-gray-800 mb-4 flex items-center">
+                        <span class="w-2 h-6 bg-rose-500 rounded-sm mr-2"></span>
+                        どれくらいお金がかかる？ (単位: 億円)
+                    </h4>
+                    <p class="text-xs text-gray-500 mb-4">
+                        病院の赤字だけでなく、「博物館の建設費」や「企業から請求されているお金」も大きな負担です。
+                    </p>
+                    <div class="chart-container">
+                        <canvas id="fiscalChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Chart 2: Reconstruction Gap -->
+                <div class="bg-white p-6 rounded-xl shadow-sm">
+                    <h4 class="font-bold text-gray-800 mb-4 flex items-center">
+                        <span class="w-2 h-6 bg-amber-500 rounded-sm mr-2"></span>
+                        湖北病院を直すのに足りないお金
+                    </h4>
+                    <p class="text-xs text-gray-500 mb-4">
+                        建物は古くなっていますが、直すためのお金がこれだけ足りません。
+                    </p>
+                    <div class="chart-container flex justify-center items-center">
+                        <canvas id="reconstructionChart"></canvas>
+                    </div>
+                    <div class="mt-4 text-center">
+                        <p class="text-2xl font-bold text-amber-600">27億円 足りない</p>
+                        <p class="text-xs text-gray-500">30年間で必要な額に対して</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: Context & Factors -->
+        <section id="context" class="scroll-mt-24 pt-8 border-t border-stone-200">
+            <h3 class="text-2xl font-bold text-stone-800 mb-6">🤔 なぜ赤字なの？ その他の原因</h3>
+             <div class="grid md:grid-cols-3 gap-6">
+                 <!-- Factor 1 -->
+                 <div class="bg-white p-5 rounded-lg border border-stone-100">
+                     <div class="text-3xl mb-3">🩺</div>
+                     <h5 class="font-bold text-stone-800 mb-2">物価や給料が上がった</h5>
+                     <p class="text-sm text-stone-600">
+                         国が決める「医療の値段（診療報酬）」は変わらないのに、電気代やスタッフの給料などのコストが上がっているため、赤字になりやすくなっています。
+                     </p>
+                 </div>
+                 <!-- Factor 2 -->
+                 <div class="bg-white p-5 rounded-lg border border-stone-100">
+                     <div class="text-3xl mb-3">🏯</div>
+                     <h5 class="font-bold text-stone-800 mb-2">戦国ミュージアムの建設</h5>
+                     <p class="text-sm text-stone-600">
+                         約13億円かけて建設しました。毎年1000万円の赤字が出ると言われていて、市のお金を使う原因のひとつです。
+                     </p>
+                 </div>
+                 <!-- Factor 3 -->
+                 <div class="bg-white p-5 rounded-lg border border-stone-100">
+                     <div class="text-3xl mb-3">⚖️</div>
+                     <h5 class="font-bold text-stone-800 mb-2">14億円の請求トラブル</h5>
+                     <p class="text-sm text-stone-600">
+                         ある企業から「約14億2000万円を払ってください」と急に言われています。これにより、市のお金の計画が難しくなっています。
+                     </p>
+                 </div>
+             </div>
+        </section>
+
+        <!-- SECTION: Sources (NEW) -->
+        <section id="sources" class="scroll-mt-24 pt-8 border-t border-stone-200 mb-12">
+            <h3 class="text-lg font-bold text-stone-700 mb-4">📚 情報源（ソース）とリンク</h3>
+            <div class="bg-white p-6 rounded-xl border border-stone-200 text-sm">
+                <p class="mb-4 text-stone-600">このページの情報は、以下の資料や報道をもとに作成しています。</p>
+                <ul class="list-disc pl-5 space-y-2 text-stone-600">
+                    <li>
+                        <strong>市民団体のアンケート結果：</strong> 湖北の地域医療を考える会による「病院問題に関する質問状」（2024-2025年頃の調査）
+                    </li>
+                    <li>
+                        <strong>長浜市 公式発表：</strong>
+                        <a href="https://www.city.nagahama.lg.jp/" target="_blank" class="text-blue-600 hover:underline">
+                            長浜市ホームページ（病院再編・経営状況について）
+                        </a>
+                        <br>
+                        <span class="text-xs text-stone-400">※市立病院の赤字見込み（約24億円）について言及されています。</span>
+                    </li>
+                    <li>
+                        <strong>関連する報道・ニュース：</strong> 小谷城戦国歴史資料館の運営状況や、企業からの損害賠償請求に関する報道
+                    </li>
+                </ul>
+                <div class="mt-4 p-3 bg-stone-50 rounded text-xs text-stone-500">
+                    <p>※このWebアプリは、提供されたニュース記事や資料をもとにAIが作成した「まとめ」です。最新の正確な情報は、必ず市の公式発表や新聞記事を確認してください。</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-stone-800 text-stone-400 py-8">
+        <div class="max-w-6xl mx-auto px-4 text-center text-sm">
+            <p class="mb-2">Created for educational purposes to visualize local election issues.</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- Data Store (Simplified Japanese) ---
+        const debateData = {
+            management: {
+                matsumoto: "<strong>【新しい形を考える】</strong><br>今の計画をしっかりやった上で、病院の運営を新しい形（独立行政法人など）にすることも考えるべきです。それぞれの病院の役割分担が必要です。",
+                asami: "<strong>【まずは今のピンチを脱出】</strong><br>とにかく今の経営危機を何とかするのが先です。このままだと長浜赤十字病院と共倒れになってしまい、市民の負担がとても大きくなると心配しています。",
+                analysis: "松本さんは「役割分担」など新しい形を検討中。浅見市長は、以前言っていた「日赤にお任せする（指定管理）」という言葉を使わなくなっています。"
+            },
+            reconstruction: {
+                matsumoto: "<strong>【ボロボロだから早く直す】</strong><br>雨漏りやエアコンの故障など、現場は「危機的」です。できるだけ早く工事を始める必要があります。",
+                asami: "<strong>【必要だけどお金が足りない】</strong><br>絶対に必要な施設だとは分かっています。でも、30年間で約27億円もお金が足りていません。「どうするか早めに考える」と言っています。",
+                analysis: "二人とも、運営の方法が決まっていないので、「いつ工事をするか」はまだはっきり言えていません。"
+            },
+            finance: {
+                matsumoto: "<strong>【市がもっと助けるべき】</strong><br>市などの公的な支援（お金のサポート）を強くしていくべきです。国にも「もっと助けて」と言っていきます。",
+                asami: "<strong>【他のサービスへの影響が心配】</strong><br>お金の事情を見ながら考えます。毎年たくさんのお金を病院に出すと、子育てや教育に使うお金が減ってしまうかもしれません。",
+                analysis: "松本さんは「もっと支援しよう」と言いますが、浅見市長は「他への影響」を考えて慎重になっています。"
+            },
+            transparency: {
+                matsumoto: "<strong>【もっと市民にオープンに】</strong><br>市民の声が届いていません。大事な会議が秘密にされているのはおかしいです。「どんな話し合いをしているか」は一番大事なことなので、隠さず公開すべきです。",
+                asami: "<strong>【良い点・悪い点を説明する】</strong><br>市民の負担に関わることなので、メリットとデメリットを示しながら進めます。専門家の会議ですでに合意されていることです。",
+                analysis: "松本さんは「話し合いの過程を見せること」を重視し、浅見市長は「専門家が決めたこと」を重視しています。"
+            }
+        };
+
+        // --- Interaction Logic: Debate Section ---
+        function updateDebate(topic) {
+            // Update Text Content with Fade Effect
+            const mContent = document.getElementById('matsumoto-content');
+            const aContent = document.getElementById('asami-content');
+            const analysisText = document.getElementById('analysis-text');
+            
+            mContent.style.opacity = '0';
+            aContent.style.opacity = '0';
+            analysisText.style.opacity = '0';
+
+            setTimeout(() => {
+                mContent.innerHTML = debateData[topic].matsumoto;
+                aContent.innerHTML = debateData[topic].asami;
+                analysisText.innerHTML = debateData[topic].analysis;
+                
+                mContent.style.opacity = '1';
+                aContent.style.opacity = '1';
+                analysisText.style.opacity = '1';
+            }, 200);
+
+            // Update Buttons
+            document.querySelectorAll('.topic-btn').forEach(btn => {
+                if(btn.dataset.topic === topic) {
+                    btn.classList.remove('inactive-tab');
+                    btn.classList.add('active-tab');
+                } else {
+                    btn.classList.add('inactive-tab');
+                    btn.classList.remove('active-tab');
+                }
+            });
+        }
+
+        // --- Visualization Logic: Chart.js ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize Debate Section
+            updateDebate('management');
+
+            // 1. Fiscal Context Chart (Bar)
+            const ctxFiscal = document.getElementById('fiscalChart').getContext('2d');
+            new Chart(ctxFiscal, {
+                type: 'bar',
+                data: {
+                    labels: ['病院の赤字(予想)', '企業からの請求', '博物館の建設費'],
+                    datasets: [{
+                        label: '金額 (億円)',
+                        data: [24, 14.2, 13],
+                        backgroundColor: [
+                            'rgba(244, 63, 94, 0.7)', // Rose for Deficit
+                            'rgba(107, 114, 128, 0.7)', // Gray for Lawsuit
+                            'rgba(245, 158, 11, 0.7)'  // Amber for Museum
+                        ],
+                        borderColor: [
+                            'rgba(244, 63, 94, 1)',
+                            'rgba(107, 114, 128, 1)',
+                            'rgba(245, 158, 11, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.parsed.y + ' 億円';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: '金額 (億円)'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // 2. Reconstruction Gap Chart (Doughnut)
+            const ctxRecon = document.getElementById('reconstructionChart').getContext('2d');
+            new Chart(ctxRecon, {
+                type: 'doughnut',
+                data: {
+                    labels: ['足りないお金', 'なんとかなりそうなお金'],
+                    datasets: [{
+                        data: [27, 10], 
+                        backgroundColor: [
+                            'rgba(244, 63, 94, 0.8)',
+                            'rgba(229, 231, 235, 0.5)'
+                        ],
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom' },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    if(context.label === '足りないお金') return '不足: 約27億円';
+                                    return '積立金など';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
