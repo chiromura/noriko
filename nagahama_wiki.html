@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>長浜・人間国宝Wiki化計画：Project Human Treasure</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/markdown-it@14.0.0/dist/markdown-it.min.js"></script>
+    <!-- QR Code Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Zen+Maru+Gothic:wght@500;700;900&family=Shippori+Mincho:wght@400;500;600;700;800&display=swap');
+        
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: #fcfbf9; /* Japanese Paper White */
+            color: #272119; /* Sumi Ink Black */
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d6d3d1' fill-opacity='0.15'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        h1, h2, h3, .pop-font {
+            font-family: 'Zen+Maru+Gothic', sans-serif;
+        }
+        .serif-font {
+            font-family: 'Shippori+Mincho', serif;
+        }
+        .gold-gradient {
+            background: linear-gradient(135deg, #b45309 0%, #d97706 20%, #fcd34d 50%, #d97706 80%, #b45309 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: shine 4s linear infinite;
+        }
+        @keyframes shine {
+            to {
+                background-position: 200% center;
+            }
+        }
+        .treasure-card {
+            background: #fff;
+            border: 1px solid #e7e5e4;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+        }
+        .treasure-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border-color: #d97706;
+        }
+        .wiki-paper {
+            background-color: #fff;
+            background-image: linear-gradient(#f5f5f4 1px, transparent 1px);
+            background-size: 100% 2rem;
+            line-height: 2rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .ai-response h1 { font-size: 1.5em; font-weight: bold; margin-bottom: 0.5em; color: #78350f; font-family: 'Shippori+Mincho', serif; border-bottom: 2px solid #d97706; padding-bottom: 0.2em; }
+        .ai-response h2 { font-size: 1.2em; font-weight: bold; margin-top: 1em; margin-bottom: 0.5em; color: #92400e; }
+        .ai-response p { margin-bottom: 1em; }
+        .ai-response strong { color: #b45309; }
+    </style>
+</head>
+<body class="min-h-screen pb-24">
+
+    <!-- Hero Section -->
+    <header class="bg-white/90 backdrop-blur border-b-4 border-[#d97706] sticky top-0 z-50 shadow-md">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-4">
+                <div class="bg-[#d97706] text-white p-2 rounded-lg shadow-inner">
+                    <span class="text-3xl">宝</span>
+                </div>
+                <div>
+                    <h1 class="text-2xl md:text-3xl font-black serif-font tracking-tight">
+                        長浜<span class="gold-gradient">人間国宝</span>Wiki化計画
+                    </h1>
+                    <p class="text-xs text-[#78350f] font-bold mt-1">Every Citizen is a Living Treasure.</p>
+                </div>
+            </div>
+            
+            <a href="https://chiromura.github.io/noriko/" target="_blank" class="flex items-center gap-2 bg-[#fffbeb] border border-[#d97706] px-4 py-2 rounded-full hover:bg-[#ffedd5] transition-colors group">
+                <span class="text-xs font-bold text-[#92400e]">Wiki編集長：のりこ</span>
+                <span class="text-[#d97706] group-hover:translate-x-1 transition-transform">→</span>
+            </a>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 pt-10 space-y-16">
+
+        <!-- 1. The Vision (Wiki Ecosystem) -->
+        <section>
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-black text-[#292524] pop-font mb-4">町全体を、生きた博物館に。</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto leading-relaxed">
+                    長浜に住む12万人全員が、それぞれの人生という物語を持つ「人間国宝」です。<br>
+                    のりこ（取材・編集）と颯（発掘・支援）の最強タッグで、その宝物を掘り起こし、Wikiという形で未来へ残します。
+                </p>
+            </div>
+
+            <!-- Cycle Diagram -->
+            <div class="bg-white p-8 rounded-3xl shadow-xl border border-[#e7e5e4] relative overflow-hidden">
+                <h3 class="text-center font-bold text-[#d97706] mb-8 text-lg serif-font">✨ 人間国宝・認定サイクル ✨</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-center relative z-10">
+                    <!-- Step 1 -->
+                    <div class="treasure-card p-6 rounded-2xl text-center">
+                        <div class="text-4xl mb-3">🦴</div>
+                        <h4 class="font-bold text-gray-800 mb-2">① 発掘</h4>
+                        <p class="text-xs text-gray-500">
+                            颯くんの整体・まごのて活動。<br>
+                            「腰が痛くて畑ができん」<br>
+                            → <strong>その畑へのこだわりを発見</strong>
+                        </p>
+                    </div>
+
+                    <!-- Arrow -->
+                    <div class="hidden md:block text-center text-[#d97706] text-2xl">➔</div>
+
+                    <!-- Step 2 -->
+                    <div class="treasure-card p-6 rounded-2xl text-center border-l-4 border-[#db2777]">
+                        <div class="text-4xl mb-3">🎤</div>
+                        <h4 class="font-bold text-[#db2777] mb-2">② 取材＆Wiki化</h4>
+                        <p class="text-xs text-gray-500">
+                            のりこさんがお茶を飲みながら人生史を聞く。<br>
+                            → <strong>GitHub Wikiに記事作成</strong><br>
+                            （AIで感動的に執筆）
+                        </p>
+                    </div>
+
+                    <!-- Arrow -->
+                    <div class="hidden md:block text-center text-[#d97706] text-2xl">➔</div>
+
+                    <!-- Step 3 -->
+                    <div class="treasure-card p-6 rounded-2xl text-center border-l-4 border-[#059669]">
+                        <div class="text-4xl mb-3">🚩</div>
+                        <h4 class="font-bold text-[#059669] mb-2">③ 会いに行く</h4>
+                        <p class="text-xs text-gray-500">
+                            記事を読んだ人がツアーに参加。<br>
+                            「このおばあちゃんに会いたい！」<br>
+                            → <strong>生きがいと誇りの創出</strong>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. AI Tool: Human Treasure Profiler -->
+        <section id="wiki-maker" class="bg-[#292524] p-8 md:p-10 rounded-3xl shadow-2xl text-[#fafaf9] relative overflow-hidden">
+            <!-- Background Decoration -->
+            <div class="absolute top-0 right-0 w-96 h-96 bg-[#d97706] rounded-full mix-blend-screen filter blur-3xl opacity-10"></div>
+            
+            <div class="relative z-10 flex flex-col md:flex-row gap-8">
+                <!-- Input Area -->
+                <div class="md:w-1/2 space-y-6">
+                    <div>
+                        <h2 class="text-2xl font-bold mb-2 flex items-center gap-2 serif-font">
+                            <span class="text-[#fbbf24]">✨</span> 人間国宝メーカー
+                        </h2>
+                        <p class="text-sm text-gray-400">
+                            取材メモ（箇条書きでOK）を入力してください。AIがのりこさんの感性を宿し、その人を讃える感動的なWiki記事（Markdown形式）を生成します。
+                        </p>
+                    </div>
+
+                    <div class="space-y-2">
+                        <label class="text-xs font-bold text-[#d97706] uppercase tracking-wider">Interview Notes</label>
+                        <textarea id="wikiInput" class="w-full h-48 bg-[#1c1917] border border-[#44403c] rounded-xl p-4 text-sm text-gray-200 focus:border-[#d97706] focus:ring-1 focus:ring-[#d97706] transition-all resize-none leading-relaxed" placeholder="例：
+名前：田中さん（82歳）
+場所：朝日町の路地裏
+職業：元・浜ちりめんの織り子さん
+特徴：
+・今は自宅の前で毎日植木の手入れをしている
+・通りかかる高校生に必ず挨拶する
+・「長浜の祭りは音が違う」が口癖
+・戦争中、疎開してきた子に握り飯をあげた話をしてくれた"></textarea>
+                    </div>
+
+                    <button id="wikiBtn" class="w-full bg-gradient-to-r from-[#b45309] to-[#d97706] hover:from-[#9a3412] hover:to-[#b45309] text-white font-bold py-4 rounded-xl shadow-lg transform active:scale-95 transition-all flex items-center justify-center gap-3">
+                        <span class="text-xl">🖋️</span> Wiki記事を執筆する
+                    </button>
+                </div>
+
+                <!-- Output Area (Paper Style) -->
+                <div class="md:w-1/2 bg-white rounded-xl shadow-inner overflow-hidden flex flex-col relative">
+                    <div class="bg-[#e7e5e4] px-4 py-2 border-b border-[#d6d3d1] flex justify-between items-center">
+                        <span class="text-xs font-bold text-[#57534e]">Preview: Nagahama Wiki</span>
+                        <div class="flex gap-1">
+                            <div class="w-2 h-2 rounded-full bg-[#f87171]"></div>
+                            <div class="w-2 h-2 rounded-full bg-[#fbbf24]"></div>
+                            <div class="w-2 h-2 rounded-full bg-[#34d399]"></div>
+                        </div>
+                    </div>
+                    <div id="wikiResult" class="flex-1 p-6 text-[#292524] text-sm overflow-y-auto ai-response wiki-paper serif-font">
+                        <p class="text-gray-400 text-center mt-10 italic">
+                            ここに「人間国宝」の物語が紡がれます...
+                        </p>
+                    </div>
+                    <!-- Copy Button -->
+                    <button onclick="copyToClipboard()" class="absolute bottom-4 right-4 bg-gray-100 hover:bg-gray-200 text-gray-600 px-3 py-1 rounded-lg text-xs font-bold shadow-sm transition-colors">
+                        Copy Markdown
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Current Stats / Roadmap -->
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="bg-white p-6 rounded-2xl shadow-lg border-t-4 border-[#0ea5e9]">
+                <h3 class="font-bold text-[#0f172a] mb-4 pop-font">📈 Wiki化の進捗（目標）</h3>
+                <div class="chart-container" style="height: 200px;">
+                    <canvas id="progressChart"></canvas>
+                </div>
+                <p class="text-xs text-center mt-4 text-gray-500">
+                    まずは「ご近所さん100人」からスタート。<br>
+                    一人ひとりの記事が増えるたび、長浜の価値が可視化されます。
+                </p>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl shadow-lg border-t-4 border-[#eab308]">
+                <h3 class="font-bold text-[#0f172a] mb-4 pop-font">🏆 Wikiカテゴリー構想</h3>
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between p-3 bg-[#fefce8] rounded-lg border border-[#fef08a]">
+                        <span class="font-bold text-[#854d0e]">匠の技 (Artisan)</span>
+                        <span class="text-xs bg-[#fef08a] px-2 py-1 rounded text-[#854d0e]">浜ちりめん / ガラス / 盆栽</span>
+                    </div>
+                    <div class="flex items-center justify-between p-3 bg-[#fefce8] rounded-lg border border-[#fef08a]">
+                        <span class="font-bold text-[#854d0e]">味の記憶 (Taste)</span>
+                        <span class="text-xs bg-[#fef08a] px-2 py-1 rounded text-[#854d0e]">漬物名人 / 郷土料理 / 隠れ家</span>
+                    </div>
+                    <div class="flex items-center justify-between p-3 bg-[#fefce8] rounded-lg border border-[#fef08a]">
+                        <span class="font-bold text-[#854d0e]">町の守人 (Guardian)</span>
+                        <span class="text-xs bg-[#fef08a] px-2 py-1 rounded text-[#854d0e]">地蔵盆 / 雪かき / 祭り囃子</span>
+                    </div>
+                </div>
+                <div class="mt-4 p-3 bg-gray-50 rounded text-xs text-gray-600 leading-relaxed">
+                    ※これらのカテゴリーは、のりこさんが取材を通じて発見し、Geminiと相談しながら動的に増やしていきます。
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-[#292524] text-[#a8a29e] py-12 mt-16 text-center">
+        <h2 class="text-xl font-bold text-white mb-2 serif-font">長浜・人間国宝Wiki化計画</h2>
+        <p class="text-sm mb-6">Produced by Sou & Noriko</p>
+        <a href="https://chiromura.github.io/noriko/" target="_blank" class="text-[#d97706] hover:text-[#fbbf24] underline text-sm transition-colors">
+            Official Portal (GitHub Pages)
+        </a>
+    </footer>
+
+    <!-- Logic -->
+    <script>
+        // --- Conf ---
+        const apiKey = ""; // Injected by env
+        const md = window.markdownit();
+
+        // --- Chart Logic ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const ctx = document.getElementById('progressChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Wiki化済み (想定)', '取材予定', '未発掘'],
+                    datasets: [{
+                        data: [15, 35, 9950], // Symbolic numbers
+                        backgroundColor: ['#d97706', '#fcd34d', '#e5e7eb'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { position: 'right' } }
+                }
+            });
+        });
+
+        // --- AI Logic ---
+        const baseContext = `
+        あなたは「長浜・人間国宝Wiki」の専属ライター兼編集者です。
+        編集長は「のりこ（長浜を愛するプロデューサー）」です。
+
+        【ミッション】
+        ごく普通の市民の人生における「輝き」を見つけ出し、
+        まるで「人間国宝」であるかのような、尊厳と愛のある紹介文（Wiki記事）を作成すること。
+
+        【出力フォーマット】
+        Markdown形式。
+        - タイトル：キャッチーで尊厳のある二つ名（例：「朝日町の路地裏を守る、笑顔の守護神」）
+        - 概要：その人の魅力を3行で。
+        - 「国宝」認定理由：取材メモから読み取れる、その人の素晴らしさ。
+        - エピソード：感動的、あるいはユニークな物語。
+        - 筆者（のりこ）の一言コメント：親しみやすく。
+        `;
+
+        async function callGemini(prompt) {
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+            const payload = {
+                contents: [{ parts: [{ text: prompt }] }],
+                systemInstruction: { parts: [{ text: baseContext }] }
+            };
+
+            const delays = [1000, 2000, 4000];
+            for (let i = 0; i < delays.length; i++) {
+                try {
+                    const response = await fetch(url, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    if (!response.ok) throw new Error(`HTTP Error`);
+                    const data = await response.json();
+                    return data.candidates[0].content.parts[0].text;
+                } catch (error) {
+                    if (i === delays.length - 1) throw error;
+                    await new Promise(resolve => setTimeout(resolve, delays[i]));
+                }
+            }
+        }
+
+        document.getElementById('wikiBtn').addEventListener('click', async () => {
+            const notes = document.getElementById('wikiInput').value;
+            const btn = document.getElementById('wikiBtn');
+            const resultDiv = document.getElementById('wikiResult');
+
+            if (!notes.trim()) return;
+
+            const originalContent = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = `<span class="animate-spin text-xl">🌀</span> 執筆中...`;
+            resultDiv.innerHTML = `<div class="text-center text-gray-400 mt-10">Geminiがのりこさんのメモを読み込み中...<br>最適な二つ名を考案中...</div>`;
+
+            try {
+                const response = await callGemini(`以下の取材メモを元に、人間国宝Wikiの記事を書いてください：\n\n${notes}`);
+                resultDiv.innerHTML = md.render(response);
+            } catch (e) {
+                resultDiv.innerHTML = `<span class="text-red-500">エラーが発生しました。</span>`;
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = originalContent;
+            }
+        });
+
+        function copyToClipboard() {
+            const content = document.getElementById('wikiResult').innerText;
+            navigator.clipboard.writeText(content).then(() => {
+                alert('テキストをコピーしました！GitHub Pagesに貼り付けてください。');
+            });
+        }
+    </script>
+</body>
+</html>
